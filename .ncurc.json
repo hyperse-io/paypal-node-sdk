@@ -1,0 +1,6 @@
+{
+  "dep": "prod,dev,bundle,optional",
+  "reject": [
+    "eslint"
+  ]
+}

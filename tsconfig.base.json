@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "useUnknownInCatchVariables": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "useDefineForClassFields": false,
+    "module": "nodenext",
+    "target": "es2021",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "incremental": true,
+    "declaration": true,
+    "newLine": "lf",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "exclude": ["**/node_modules", "**/.*/"]
+}

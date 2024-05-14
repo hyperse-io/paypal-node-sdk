@@ -1,0 +1,91 @@
+{
+  "name": "@hyperse-io/paypal-node-sdk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NodeJS SDK for PayPal Checkout APIs",
+  "keywords": [
+    "hyperse",
+    "esm",
+    "paypal",
+    "paypal nodejs",
+    "paypal sdk"
+  ],
+  "homepage": "git@github.com:hyperse-io/paypal-node-sdk.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hyperse-io/paypal-node-sdk.git"
+  },
+  "author": {
+    "name": "Yingchun Tian",
+    "url": "https://github.com/tianyingchun"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist/",
+    "./index.js"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p ./tsconfig.build.json ",
+    "clean": "rimraf --no-glob ./dist ./coverage ./.eslintcache ./tsconfig.tsbuildinfo",
+    "test-task": "vitest run",
+    "test-unit": "vitest run --dir src/",
+    "test-e2e": "vitest run --dir e2e/",
+    "lint": "eslint . --ext .ts,.mts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location .cache/eslint/hyperse-main.eslintcache",
+    "typecheck": "tsc --project ./tsconfig.json --noEmit",
+    "lint-staged-files": "lint-staged --allow-empty",
+    "fix-all-files": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "yarn run build && changeset publish",
+    "cz": "cz",
+    "husky": "is-ci || husky"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@paypal/paypalhttp": "^1.0.0",
+    "@types/paypal__paypalhttp": "^1.0.3"
+  },
+  "devDependencies": {
+    "@armit/eslint-config-bases": "0.1.5",
+    "@changesets/changelog-git": "0.2.0",
+    "@changesets/cli": "2.27.1",
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "@swc/core": "1.5.5",
+    "@types/node": "20.12.11",
+    "@types/prettier": "3.0.0",
+    "@types/shell-quote": "1.7.5",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.x",
+    "husky": "9.0.11",
+    "is-ci": "3.0.1",
+    "lint-staged": "15.2.2",
+    "minimist": "1.2.8",
+    "npm-run-all": "4.1.5",
+    "prettier": "3.2.5",
+    "rimraf": "5.0.6",
+    "shell-quote": "1.8.1",
+    "swc-unplugin-ts": "1.0.3",
+    "terser": "5.31.0",
+    "typescript": "5.4.5",
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "yarn@4.2.2"
+}
