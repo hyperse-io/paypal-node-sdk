@@ -24,10 +24,27 @@
       "import": "./index.js",
       "types": "./dist/index.d.ts"
     },
+    "./core": {
+      "import": "./dist/core/index.js",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./orders": {
+      "import": "./dist/orders/index.js",
+      "types": "./dist/orders/index.d.ts"
+    },
+    "./payments": {
+      "import": "./dist/payments/index.js",
+      "types": "./dist/payments/index.d.ts"
+    },
+    "./webhook": {
+      "import": "./dist/webhook/index.js",
+      "types": "./dist/webhook/index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "types": "./dist/index.d.ts",
   "files": [
+    "./index.js",
     "./dist/"
   ],
   "workspaces": [

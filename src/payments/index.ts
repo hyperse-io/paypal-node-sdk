@@ -1,17 +1,7 @@
-import { AuthorizationsCaptureRequest } from './authorizationsCaptureRequest.js';
-import { AuthorizationsGetRequest } from './authorizationsGetRequest.js';
-import { AuthorizationsReauthorizeRequest } from './authorizationsReauthorizeRequest.js';
-import { AuthorizationsVoidRequest } from './authorizationsVoidRequest.js';
-import { CapturesGetRequest } from './capturesGetRequest.js';
-import { CapturesRefundRequest } from './capturesRefundRequest.js';
-import { RefundsGetRequest } from './refundsGetRequest.js';
-
-export const payments = {
-  AuthorizationsCaptureRequest,
-  AuthorizationsGetRequest,
-  AuthorizationsReauthorizeRequest,
-  AuthorizationsVoidRequest,
-  CapturesGetRequest,
-  CapturesRefundRequest,
-  RefundsGetRequest,
-};
+export { AuthorizationsCaptureRequest } from './authorizationsCaptureRequest.js';
+export { AuthorizationsGetRequest } from './authorizationsGetRequest.js';
+export { AuthorizationsReauthorizeRequest } from './authorizationsReauthorizeRequest.js';
+export { AuthorizationsVoidRequest } from './authorizationsVoidRequest.js';
+export { CapturesGetRequest } from './capturesGetRequest.js';
+export { CapturesRefundRequest } from './capturesRefundRequest.js';
+export { RefundsGetRequest } from './refundsGetRequest.js';

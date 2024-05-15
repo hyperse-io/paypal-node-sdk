@@ -1,13 +1,5 @@
-import { OrdersAuthorizeRequest } from './ordersAuthorizeRequest.js';
-import { OrdersCaptureRequest } from './ordersCaptureRequest.js';
-import { OrdersCreateRequest } from './ordersCreateRequest.js';
-import { OrdersGetRequest } from './ordersGetRequest.js';
-import { OrdersPatchRequest } from './ordersPatchRequest.js';
-
-export const orders = {
-  OrdersAuthorizeRequest,
-  OrdersCaptureRequest,
-  OrdersCreateRequest,
-  OrdersGetRequest,
-  OrdersPatchRequest,
-};
+export { OrdersAuthorizeRequest } from './ordersAuthorizeRequest.js';
+export { OrdersCaptureRequest } from './ordersCaptureRequest.js';
+export { OrdersCreateRequest } from './ordersCreateRequest.js';
+export { OrdersGetRequest } from './ordersGetRequest.js';
+export { OrdersPatchRequest } from './ordersPatchRequest.js';

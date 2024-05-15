@@ -1,5 +1,5 @@
-export * from './core/index.js';
-export * from './orders/index.js';
-export * from './payments/index.js';
-export * from './customers/index.js';
-export * from './webhook/index.js';
+export * as core from './core/index.js';
+export * as orders from './orders/index.js';
+export * as payments from './payments/index.js';
+export * as customers from './customers/index.js';
+export * as webhook from './webhook/index.js';

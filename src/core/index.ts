@@ -1,21 +1,10 @@
-import { AccessToken } from './AccessToken.js';
-import { AccessTokenRequest } from './AccessTokenRequest.js';
-import {
+export { AccessToken } from './AccessToken.js';
+export { AccessTokenRequest } from './AccessTokenRequest.js';
+export {
   LiveEnvironment,
   PayPalEnvironment,
   SandboxEnvironment,
 } from './PayPalEnvironment.js';
-import { PayPalHttpClient } from './PayPalHttpClient.js';
-import { RefreshTokenRequest } from './RefreshTokenRequest.js';
-import { TokenCache } from './TokenCache.js';
-
-export const core = {
-  AccessToken,
-  AccessTokenRequest,
-  PayPalEnvironment,
-  LiveEnvironment,
-  SandboxEnvironment,
-  PayPalHttpClient,
-  RefreshTokenRequest,
-  TokenCache,
-};
+export { PayPalHttpClient } from './PayPalHttpClient.js';
+export { RefreshTokenRequest } from './RefreshTokenRequest.js';
+export { TokenCache } from './TokenCache.js';
