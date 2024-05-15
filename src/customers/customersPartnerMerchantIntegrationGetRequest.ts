@@ -1,10 +1,11 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BaseCustomerHeaders } from './types.js';
 
 /**
  Authorizes payment for an order. The response shows authorization details.
  **/
-export class CustomersPartnerMerchantIntegrationGetRequest extends HttpRequestBase {
+export class CustomersPartnerMerchantIntegrationGetRequest extends HttpRequestBase<BaseCustomerHeaders> {
   constructor(partnerMerchantId: string, sellerMerchantId: string) {
     super();
     this.path =

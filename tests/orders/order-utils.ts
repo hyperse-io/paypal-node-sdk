@@ -21,6 +21,6 @@ function buildRequestBody() {
 export function createOrder() {
   const request = new OrdersCreateRequest();
   request.prefer('return=representation');
-  request.requestBody(buildRequestBody());
+  request.requestBody(buildRequestBody() as any);
   return client.execute(request);
 }

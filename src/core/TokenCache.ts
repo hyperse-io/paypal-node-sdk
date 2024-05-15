@@ -7,6 +7,9 @@ const _cacheMap: Record<string, TokenCache> = {};
 
 /**
  * Stores token, token status and a request queue for every client
+ * Documentation
+ *
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/TokenCache.ts}
  */
 export class TokenCache {
   private _token: AccessToken | null;

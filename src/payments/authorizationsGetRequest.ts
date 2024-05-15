@@ -1,11 +1,13 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BasePaymentHeaders } from './types.js';
 
 /*
  * Shows details for an authorized payment, by ID.
+ * @see {@link https://developer.paypal.com/api/payments/v2/#authorizations_get}
  */
-export class AuthorizationsGetRequest extends HttpRequestBase {
-  constructor(authorizationId) {
+export class AuthorizationsGetRequest extends HttpRequestBase<BasePaymentHeaders> {
+  constructor(authorizationId: string) {
     super();
     this.path = '/v2/payments/authorizations/{authorization_id}?';
     this.path = this.path.replace(

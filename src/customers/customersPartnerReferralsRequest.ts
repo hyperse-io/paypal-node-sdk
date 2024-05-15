@@ -1,4 +1,5 @@
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BaseCustomerHeaders } from './types.js';
 
 type CustomersPartnerReferralsRequestBody = {
   //
@@ -7,7 +8,10 @@ type CustomersPartnerReferralsRequestBody = {
 /**
  Authorizes payment for an order. The response shows authorization details.
  **/
-export class CustomersPartnerReferralsRequest extends HttpRequestBase<CustomersPartnerReferralsRequestBody> {
+export class CustomersPartnerReferralsRequest extends HttpRequestBase<
+  BaseCustomerHeaders,
+  CustomersPartnerReferralsRequestBody
+> {
   constructor() {
     super();
     this.path = '/v2/customer/partner-referrals?';

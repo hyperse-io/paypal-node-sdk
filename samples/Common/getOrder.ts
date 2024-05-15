@@ -1,4 +1,4 @@
-import { OrdersGetRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from './payPalClient.js';
 
 /**
@@ -9,7 +9,7 @@ import { createClient } from './payPalClient.js';
  * @returns
  */
 export async function getOrder(orderId) {
-  const request = new OrdersGetRequest(orderId);
+  const request = new orders.OrdersGetRequest(orderId);
   const response = await createClient().execute(request);
   console.log('Status Code: ' + response.statusCode);
   console.log('Status: ' + response.result.status);

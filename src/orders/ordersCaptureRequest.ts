@@ -1,16 +1,27 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type PaymentSource, type BaseOrderHeaders } from './types.js';
 /**
  * Captures a payment for an order payload
  */
-type OrdersCaptureRequestBody = {
-  //
+export type OrdersCaptureRequestBody = {
+  payment_source: PaymentSource;
 };
 
+export interface OrdersCaptureRequestHeaders extends BaseOrderHeaders {
+  'PayPal-Client-Metadata-Id'?: string;
+  'PayPal-Request-Id'?: string;
+  Prefer?: string;
+}
 /**
  * Captures a payment for an order.
+ *
+ * @see {@link https://developer.paypal.com/api/orders/v2/#orders_capture}
  */
-export class OrdersCaptureRequest extends HttpRequestBase<OrdersCaptureRequestBody> {
+export class OrdersCaptureRequest extends HttpRequestBase<
+  OrdersCaptureRequestHeaders,
+  OrdersCaptureRequestBody
+> {
   constructor(orderId: string) {
     super();
     this.path = '/v2/checkout/orders/{order_id}/capture?';

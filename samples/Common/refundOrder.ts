@@ -1,4 +1,4 @@
-import { CapturesRefundRequest } from '@hyperse-io/paypal-node-sdk';
+import { payments } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from './payPalClient.js';
 /**
  * This method can be used to refund the capture. This function should be called
@@ -10,13 +10,13 @@ import { createClient } from './payPalClient.js';
  */
 export async function refundOrder(captureId, debug = false) {
   try {
-    const request = new CapturesRefundRequest(captureId);
+    const request = new payments.CapturesRefundRequest(captureId);
     request.requestBody({
       amount: {
         value: '20.00',
         currency_code: 'USD',
       },
-    });
+    } as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Status Code: ' + response.statusCode);

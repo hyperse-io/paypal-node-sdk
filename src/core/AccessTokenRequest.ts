@@ -1,15 +1,25 @@
 import { HttpRequestBase } from './HttpRequestBase.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 
-type AccessTokenRequestBody = {
+export type AccessTokenRequestBody = {
   grant_type: string;
   refresh_token: string;
 };
 
+export type AccessTokenRequestHeaders = {
+  'Content-Type': string;
+  Authorization: string;
+};
+
 /**
  * An OAuth2 client credentials grant access token request
+ * Documentation
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/AccessTokenRequest.ts}
  */
-export class AccessTokenRequest extends HttpRequestBase<AccessTokenRequestBody> {
+export class AccessTokenRequest extends HttpRequestBase<
+  AccessTokenRequestHeaders,
+  AccessTokenRequestBody
+> {
   /**
    * @param environment  The environment for this request (sandbox or live)
    * @param refreshToken - An optional refresh token to use refreshing instead of granting

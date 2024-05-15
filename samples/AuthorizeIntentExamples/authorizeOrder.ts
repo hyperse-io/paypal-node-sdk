@@ -1,4 +1,4 @@
-import { OrdersAuthorizeRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'samples/Common/payPalClient.js';
 
 /**
@@ -11,7 +11,7 @@ import { createClient } from 'samples/Common/payPalClient.js';
  */
 export async function authorizeOrder(orderId, debug = false) {
   try {
-    const request = new OrdersAuthorizeRequest(orderId);
+    const request = new orders.OrdersAuthorizeRequest(orderId);
     request.requestBody({});
     const response = await createClient().execute(request);
     if (debug) {

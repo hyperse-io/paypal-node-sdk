@@ -1,4 +1,4 @@
-import { OrdersPatchRequest } from '../../src/orders/ordersPatchRequest.js';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createOrder } from '../CaptureIntentExamples/createOrder.js';
 import { getOrder } from './getOrder.js';
 import { createClient } from './payPalClient.js';
@@ -32,8 +32,8 @@ function buildRequestBody() {
 }
 
 async function patchOrder(orderId) {
-  const request = new OrdersPatchRequest(orderId);
-  request.requestBody(buildRequestBody());
+  const request = new orders.OrdersPatchRequest(orderId);
+  request.requestBody(buildRequestBody() as any);
   const response = await createClient().execute(request);
   console.log('PATCH Status Code: ' + response.statusCode);
   // To toggle print the whole body comment/uncomment the below line

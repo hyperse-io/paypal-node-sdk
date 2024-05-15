@@ -1,14 +1,23 @@
+import { type AccessTokenRequestHeaders } from './AccessTokenRequest.js';
 import { HttpRequestBase } from './HttpRequestBase.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 
-type RefreshTokenRequestBody = {
+export type RefreshTokenRequestBody = {
   code: string;
   grant_type: string;
 };
 /**
  * An OAuth2 refresh token request, granted from user consent.
+ *
+ * Documentation
+ *
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/RefreshTokenRequest.ts}
  */
-export class RefreshTokenRequest extends HttpRequestBase<RefreshTokenRequestBody> {
+
+export class RefreshTokenRequest extends HttpRequestBase<
+  AccessTokenRequestHeaders,
+  RefreshTokenRequestBody
+> {
   /**
    * @param {PayPalEnvironment} environment - The environment for this request (sandbox or live)
    * @param {string} code - The authorization code provided at the end of the user consent OAuth flow.

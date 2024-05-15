@@ -1,4 +1,4 @@
-import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient, prettyPrint } from './payPalClient.js';
 
 /**
@@ -6,9 +6,9 @@ import { createClient, prettyPrint } from './payPalClient.js';
  */
 async function createError1() {
   try {
-    const request = new OrdersCreateRequest();
+    const request = new orders.OrdersCreateRequest();
     request.prefer('return=representation');
-    request.requestBody({});
+    request.requestBody({} as any);
     console.log(`Request Body:\n${JSON.stringify(request.body, null, 4)}`);
     console.log('Response:');
     await createClient().execute(request);
@@ -23,12 +23,12 @@ async function createError1() {
  */
 async function createError2() {
   try {
-    const request = new OrdersCreateRequest();
+    const request = new orders.OrdersCreateRequest();
     request.prefer('return=representation');
     request.requestBody({
       intent: 'INVALID',
       purchase_units: [{ amount: { currency_code: 'USD', value: '100.00' } }],
-    });
+    } as any);
     console.log(`Request Body:\n${JSON.stringify(request.body, null, 4)}`);
     console.log('Response:');
     await createClient().execute(request);

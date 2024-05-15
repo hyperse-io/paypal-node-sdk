@@ -1,14 +1,20 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BaseOrderHeaders } from './types.js';
 
-type OrdersValidateRequestBody = {
-  //
-};
+type OrdersValidateRequestBody = Record<string, unknown>;
+
+export interface OrdersValidateRequestHeaders extends BaseOrderHeaders {
+  'PayPal-Client-Metadata-Id'?: string;
+}
 
 /**
  * Validates a payment method and checks it for contingencies.
  */
-export class OrdersValidateRequest extends HttpRequestBase<OrdersValidateRequestBody> {
+export class OrdersValidateRequest extends HttpRequestBase<
+  OrdersValidateRequestHeaders,
+  OrdersValidateRequestBody
+> {
   constructor(orderId: string) {
     super();
     this.path = '/v2/checkout/orders/{order_id}/validate-payment-method?';

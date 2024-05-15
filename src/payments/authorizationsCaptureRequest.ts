@@ -1,14 +1,30 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type Money } from '../orders/types.js';
+import { type PaymentInstruction, type BasePaymentHeaders } from './types.js';
 
 type AuthorizationsCaptureRequestBody = {
-  //
+  amount: Money;
+  final_capture: boolean;
+  invoice_id: string;
+  note_to_payer: string;
+  payment_instruction?: PaymentInstruction;
+  soft_descriptor: string;
 };
-/**
- Captures an authorized payment, by ID.
- **/
 
-export class AuthorizationsCaptureRequest extends HttpRequestBase<AuthorizationsCaptureRequestBody> {
+interface AuthorizationsCaptureRequestHeaders extends BasePaymentHeaders {
+  'PayPal-Request-Id'?: string;
+  Prefer?: string;
+}
+
+/**
+ * Captures an authorized payment, by ID.
+ * @see {@link https://developer.paypal.com/api/payments/v2/#authorizations_capture}
+ */
+export class AuthorizationsCaptureRequest extends HttpRequestBase<
+  AuthorizationsCaptureRequestHeaders,
+  AuthorizationsCaptureRequestBody
+> {
   constructor(authorizationId) {
     super();
     this.path = '/v2/payments/authorizations/{authorization_id}/capture?';

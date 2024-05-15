@@ -4,7 +4,6 @@ import { AuthorizationsReauthorizeRequest } from './authorizationsReauthorizeReq
 import { AuthorizationsVoidRequest } from './authorizationsVoidRequest.js';
 import { CapturesGetRequest } from './capturesGetRequest.js';
 import { CapturesRefundRequest } from './capturesRefundRequest.js';
-import { ReferencedPayoutsItemsRequest } from './referencedPayoutsItems.js';
 import { RefundsGetRequest } from './refundsGetRequest.js';
 
 export const payments = {
@@ -14,6 +13,5 @@ export const payments = {
   AuthorizationsVoidRequest,
   CapturesGetRequest,
   CapturesRefundRequest,
-  ReferencedPayoutsItemsRequest,
   RefundsGetRequest,
 };

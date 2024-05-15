@@ -1,12 +1,13 @@
-import { type HttpHeaders, type HttpRequest } from '@paypal/paypalhttp';
+export interface BaseHeaders {
+  /**
+   * Will automatically be set to `Authorization` header value while http client
+   */
+  Authorization?: string;
+}
 
-export class HttpRequestBase<T extends object = object>
-  implements HttpRequest<T>
-{
-  public body: T;
-  public headers: HttpHeaders;
-  public path: string;
-  public verb:
+export interface BaseRequest<H, B = null> {
+  readonly path: string;
+  readonly verb:
     | 'CONNECT'
     | 'DELETE'
     | 'GET'
@@ -15,8 +16,27 @@ export class HttpRequestBase<T extends object = object>
     | 'PATCH'
     | 'POST'
     | 'PUT';
+  readonly body: B;
+  readonly headers: H;
+}
+
+export class HttpRequestBase<H extends BaseHeaders, B = null>
+  implements BaseRequest<H, B>
+{
+  path: string;
+  verb:
+    | 'CONNECT'
+    | 'DELETE'
+    | 'GET'
+    | 'HEAD'
+    | 'OPTIONS'
+    | 'PATCH'
+    | 'POST'
+    | 'PUT';
+  body: B;
+  headers: H;
 
   constructor() {
-    this.body = null as unknown as T;
+    this.body = null as any;
   }
 }

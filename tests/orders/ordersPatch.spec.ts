@@ -27,7 +27,7 @@ describe('OrdersPatchRequest', () => {
     const createOrderResponse = await createOrder();
     expect(createOrderResponse.statusCode).toBe(201);
     const patchRequest = new OrdersPatchRequest(createOrderResponse.result.id);
-    patchRequest.requestBody(buildRequestBody());
+    patchRequest.requestBody(buildRequestBody() as any);
 
     const patchResponse = await client.execute(patchRequest);
     expect(patchResponse.statusCode).toBe(204);

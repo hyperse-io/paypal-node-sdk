@@ -1,4 +1,4 @@
-import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'tests/test-utils.js';
 
 /**
@@ -108,9 +108,9 @@ function buildRequestBody() {
  */
 export async function createOrder(debug = false) {
   try {
-    const request = new OrdersCreateRequest();
+    const request = new orders.OrdersCreateRequest();
     request.headers['prefer'] = 'return=representation';
-    request.requestBody(buildRequestBody());
+    request.requestBody(buildRequestBody() as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Status Code: ' + response.statusCode);

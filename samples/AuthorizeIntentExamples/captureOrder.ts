@@ -1,4 +1,4 @@
-import { AuthorizationsCaptureRequest } from '@hyperse-io/paypal-node-sdk';
+import { payments } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'samples/Common/payPalClient.js';
 
 /**
@@ -11,8 +11,8 @@ import { createClient } from 'samples/Common/payPalClient.js';
  */
 export async function captureOrder(authId, debug = false) {
   try {
-    const request = new AuthorizationsCaptureRequest(authId);
-    request.requestBody({});
+    const request = new payments.AuthorizationsCaptureRequest(authId);
+    request.requestBody({} as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Status Code: ' + response.statusCode);

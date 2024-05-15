@@ -7,6 +7,9 @@ const LIVE_WEB_URL = 'https://www.paypal.com';
 
 /**
  * Base class for PayPal Environments
+ * Documentation
+ *
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/PayPalEnvironment.ts}
  */
 export class PayPalEnvironment extends paypalhttp.Environment {
   public clientId: string;

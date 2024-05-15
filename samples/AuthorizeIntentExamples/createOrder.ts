@@ -1,4 +1,4 @@
-import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'samples/Common/payPalClient.js';
 
 /**
@@ -134,9 +134,9 @@ function buildMinimumRequestBody() {
  */
 export async function createOrderWithCompletePayload(debug = false) {
   try {
-    const request = new OrdersCreateRequest();
+    const request = new orders.OrdersCreateRequest();
     request.headers['prefer'] = 'return=representation';
-    request.requestBody(buildCompleteRequestBody());
+    request.requestBody(buildCompleteRequestBody() as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Creating Order with Complete Payload:');
@@ -172,9 +172,9 @@ export async function createOrderWithCompletePayload(debug = false) {
  */
 export async function createOrderWithPartialPayload(debug = false) {
   try {
-    const request = new OrdersCreateRequest();
+    const request = new orders.OrdersCreateRequest();
     request.prefer('return=representation');
-    request.requestBody(buildMinimumRequestBody());
+    request.requestBody(buildMinimumRequestBody() as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Creating Order with Partial Payload:');

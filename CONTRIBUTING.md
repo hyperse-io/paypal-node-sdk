@@ -62,15 +62,16 @@ type(scope): Message in present tense
 
 `scope` indicates the package affected by the commit:
 
-- common
 - core
-- create
+- orders
+- payments
+- customers
 - etc.
 
 If a commit affects more than one package, separate them with a comma:
 
 ```
-fix(core,common): Fix the thing
+fix(core,orders): Fix the thing
 ```
 
 If a commit applies to no particular package (e.g. a tooling change in the root package.json), the scope can be omitted.
@@ -97,4 +98,4 @@ Commit messages are linted on commit, so you'll know if your message is not quit
 
 ## Setting up the dev environment
 
-After cloning the artmit repo, please follow the [Development guide](https://gitlab.itcjf.com/flatjs-next/bridge/blob/main/README.md#development) in the README for instructions on how to get up and running locally.
+After cloning the repo, please follow the [Development guide](https://github.com/hyperse-io/paypal-node-sdk/blob/main/README.md#development) in the README for instructions on how to get up and running locally.

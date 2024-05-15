@@ -1,14 +1,16 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BasePaymentHeaders } from './types.js';
 
-type AuthorizationsVoidRequestBody = {
-  //
-};
-
+interface AuthorizationsVoidRequestHeaders extends BasePaymentHeaders {
+  'PayPal-Auth-Assertion'?: string;
+  Prefer?: string;
+}
 /**
  * Voids, or cancels, an authorized payment, by ID. You cannot void an authorized payment that has been fully captured.
+ * @see {@link https://developer.paypal.com/api/payments/v2/#authorizations_void}
  */
-export class AuthorizationsVoidRequest extends HttpRequestBase<AuthorizationsVoidRequestBody> {
+export class AuthorizationsVoidRequest extends HttpRequestBase<AuthorizationsVoidRequestHeaders> {
   constructor(authorizationId: string) {
     super();
     this.path = '/v2/payments/authorizations/{authorization_id}/void?';

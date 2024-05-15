@@ -1,35 +1,44 @@
 /**
- * A small amount of time to loosen the token expiration algorithm
- * @constant EXPIRATION_THRESHOLD
- * @type {number}
+ * Documentation
+ *
+ * @see {@link https://github.com/paypal/Checkout-NodeJS-SDK/blob/develop/lib/core/access_token.js}
  */
-const EXPIRATION_THRESHOLD = 500;
 
-/**
- * The access token object as it was granted by the token endpoint
- */
-type AccessTokenOptions = {
+export interface AccessTokenOptions {
   /**
    * The access token
    */
   access_token: string;
+
   /**
    * The token type
    */
-  token_type: string;
+  expires_in: number;
+
   /**
    * The duration of the token in milliseconds
    */
-  expires_in: number;
+  token_type: string;
+
   /**
    * The refresh token if any to refresh the current token
    */
-  refresh_token?: string;
-};
+  refresh_token: string;
+}
+
+/**
+ * A small amount of time to loosen the token expiration algorithm
+ */
+const EXPIRATION_THRESHOLD = 500;
 
 /**
  * An OAuth2 access token
+ *
+ * Documentation
+ *
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/AccessToken.ts}
  */
+
 export class AccessToken {
   private _accessToken: string;
   private _tokenType: string;
@@ -45,7 +54,7 @@ export class AccessToken {
 
   /**
    * Get the expiration status of the token
-   * @return {boolean} - True if the token is expired otherwise false
+   * @return - True if the token is expired otherwise false
    */
   isExpired() {
     return (
@@ -55,7 +64,7 @@ export class AccessToken {
 
   /**
    * Get the value of an Authorization header with the current access token
-   * @return {string} - The Authorization header value
+   * @return The Authorization header value
    */
   authorizationString() {
     return `${this._tokenType} ${this._accessToken}`;

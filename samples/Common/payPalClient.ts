@@ -1,8 +1,4 @@
-import {
-  LiveEnvironment,
-  PayPalHttpClient,
-  SandboxEnvironment,
-} from '@hyperse-io/paypal-node-sdk';
+import { core } from '@hyperse-io/paypal-node-sdk';
 
 /**
  * Returns PayPal HTTP client instance with environment which has access
@@ -10,7 +6,7 @@ import {
  * credentials have the access to do so.
  */
 export function createClient() {
-  return new PayPalHttpClient(environment());
+  return new core.PayPalHttpClient(environment());
 }
 
 /**
@@ -23,10 +19,10 @@ function environment() {
   const clientSecret = process.env.PAYPAL_CLIENT_SECRET || '<<CLIENT-SECRET>>';
 
   if (process.env.NODE_ENV === 'production') {
-    return new LiveEnvironment(clientId, clientSecret);
+    return new core.LiveEnvironment(clientId, clientSecret);
   }
 
-  return new SandboxEnvironment(clientId, clientSecret);
+  return new core.SandboxEnvironment(clientId, clientSecret);
 }
 
 export async function prettyPrint(jsonData, pre = '') {

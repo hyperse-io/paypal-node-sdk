@@ -1,4 +1,4 @@
-import { OrdersCaptureRequest } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'tests/test-utils.js';
 
 /**
@@ -11,8 +11,8 @@ import { createClient } from 'tests/test-utils.js';
  */
 export async function captureOrder(orderId, debug = false) {
   try {
-    const request = new OrdersCaptureRequest(orderId);
-    request.requestBody({});
+    const request = new orders.OrdersCaptureRequest(orderId);
+    request.requestBody({} as any);
     const response = await createClient().execute(request);
     if (debug) {
       console.log('Status Code: ' + response.statusCode);

@@ -1,10 +1,12 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type BasePaymentHeaders } from './types.js';
 
 /**
  * Shows details for a refund, by ID.
+ * @see {@link https://developer.paypal.com/api/payments/v2/#refunds_get}
  */
-export class RefundsGetRequest extends HttpRequestBase {
+export class RefundsGetRequest extends HttpRequestBase<BasePaymentHeaders> {
   constructor(refundId: string) {
     super();
     this.path = '/v2/payments/refunds/{refund_id}?';

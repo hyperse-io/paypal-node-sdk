@@ -1,14 +1,25 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
+import { type PaymentSource, type BaseOrderHeaders } from './types.js';
 
-type OrdersAuthorizeRequestBody = {
-  //
+export type OrdersAuthorizeRequestBody = {
+  payment_source: PaymentSource;
 };
+
+export interface OrdersAuthorizeRequestHeaders extends BaseOrderHeaders {
+  'PayPal-Client-Metadata-Id'?: string;
+  'PayPal-Request-Id'?: string;
+  Prefer?: string;
+}
 
 /**
  * Authorizes payment for an order. The response shows authorization details.
+ * @see {@link https://developer.paypal.com/api/orders/v2/#orders_authorize}
  */
-export class OrdersAuthorizeRequest extends HttpRequestBase<OrdersAuthorizeRequestBody> {
+export class OrdersAuthorizeRequest extends HttpRequestBase<
+  OrdersAuthorizeRequestHeaders,
+  OrdersAuthorizeRequestBody
+> {
   constructor(orderId: string) {
     super();
     this.path = '/v2/checkout/orders/{order_id}/authorize?';

@@ -2,12 +2,17 @@ import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
 import packageJson from '../../package.json';
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
+import { type BaseRequest } from './HttpRequestBase.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 import { TokenCache } from './TokenCache.js';
 
 /**
  * PayPal Http client
+ * Documentation
+ *
+ * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/PayPalHttpClient.ts}
  */
+
 export class PayPalHttpClient extends paypalhttp.HttpClient {
   private _cache: TokenCache;
 
@@ -73,7 +78,9 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     );
   }
 
-  execute(request: HttpRequest) {
+  execute<T = any>(
+    request: BaseRequest<any, any>
+  ): Promise<paypalhttp.HttpResponse<T>> {
     return super.execute(request).catch((err) => {
       if (err.statusCode === 401) {
         return this._retryRequest(request);
