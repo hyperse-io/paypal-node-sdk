@@ -1,3 +1,9 @@
-export * from './customersPartnerMerchantIntegrationGetRequest.js';
-export * from './customersPartnerReferralsGetRequest.js';
-export * from './customersPartnerReferralsRequest.js';
+import { CustomersPartnerMerchantIntegrationGetRequest } from './customersPartnerMerchantIntegrationGetRequest.js';
+import { CustomersPartnerReferralsGetRequest } from './customersPartnerReferralsGetRequest.js';
+import { CustomersPartnerReferralsRequest } from './customersPartnerReferralsRequest.js';
+
+export const Customers = {
+  CustomersPartnerMerchantIntegrationGetRequest,
+  CustomersPartnerReferralsGetRequest,
+  CustomersPartnerReferralsRequest,
+};
