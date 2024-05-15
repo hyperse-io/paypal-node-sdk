@@ -1,8 +1,11 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type BasePaymentHeaders } from './types.js';
+import {
+  type Capture,
+  type BasePaymentHeaders,
+} from '../types/type-payment.js';
 
-/*
+/**
  * Shows details for an authorized payment, by ID.
  * @see {@link https://developer.paypal.com/api/payments/v2/#authorizations_get}
  */
@@ -20,3 +23,8 @@ export class AuthorizationsGetRequest extends HttpRequestBase<BasePaymentHeaders
     };
   }
 }
+
+/**
+ * The response body of the AuthorizationsGetRequest.
+ */
+export type AuthorizationsGetRequestResult = Capture;

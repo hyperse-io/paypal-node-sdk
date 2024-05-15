@@ -28,6 +28,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'sonarjs/no-duplicate-string': 'off',
     // optional overrides per project
   },
   overrides: [

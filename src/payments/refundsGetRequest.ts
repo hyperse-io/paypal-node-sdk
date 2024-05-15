@@ -1,6 +1,9 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type BasePaymentHeaders } from './types.js';
+import {
+  type Capture,
+  type BasePaymentHeaders,
+} from '../types/type-payment.js';
 
 /**
  * Shows details for a refund, by ID.
@@ -17,3 +20,8 @@ export class RefundsGetRequest extends HttpRequestBase<BasePaymentHeaders> {
     };
   }
 }
+
+/**
+ * The response body of the RefundsGetRequest.
+ */
+export type RefundsGetRequestResult = Capture;

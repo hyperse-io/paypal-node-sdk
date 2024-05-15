@@ -2,7 +2,7 @@ import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
 import packageJson from '../../package.json';
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
-import { type BaseRequest } from './HttpRequestBase.js';
+import { type HttpRequestBase } from './HttpRequestBase.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 import { TokenCache } from './TokenCache.js';
 
@@ -78,8 +78,13 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     );
   }
 
+  /**
+   * Executes a request and returns a Promise
+   * @param request Request Instance of HttpRequest
+   * @returns
+   */
   execute<T = any>(
-    request: BaseRequest<any, any>
+    request: HttpRequestBase<any, any>
   ): Promise<paypalhttp.HttpResponse<T>> {
     return super.execute(request).catch((err) => {
       if (err.statusCode === 401) {

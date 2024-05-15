@@ -1,7 +1,11 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type Money } from '../orders/types.js';
-import { type PaymentInstruction, type BasePaymentHeaders } from './types.js';
+import {
+  type PaymentInstruction,
+  type Money,
+  type BasePaymentHeaders,
+  type Capture,
+} from '../types/type-payment.js';
 
 type AuthorizationsCaptureRequestBody = {
   amount: Money;
@@ -42,7 +46,11 @@ export class AuthorizationsCaptureRequest extends HttpRequestBase<
     this.headers['PayPal-Request-Id'] = payPalRequestId;
     return this;
   }
-
+  /**
+   * 1. return=minimal. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the id, status and HATEOAS links.
+   * 2. return=representation. The server returns a complete resource representation, including the current state of the resource.
+   * @default `return=minimal`
+   */
   prefer(prefer: string) {
     this.headers['Prefer'] = prefer;
     return this;
@@ -53,3 +61,8 @@ export class AuthorizationsCaptureRequest extends HttpRequestBase<
     return this;
   }
 }
+
+/**
+ * The response body of the AuthorizationsCaptureRequest.
+ */
+export type AuthorizationsCaptureRequestResult = Capture;

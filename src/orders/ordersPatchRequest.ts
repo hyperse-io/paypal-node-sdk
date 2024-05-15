@@ -1,12 +1,17 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type Patch, type BaseOrderHeaders } from './types.js';
+import {
+  type Order,
+  type BaseOrderHeaders,
+  type Patch,
+} from '../types/type-order.js';
 
 type OrderPatchRequestBody = Patch[];
 
 /**
  * Updates an order. You can update an order with `CREATED` or `APPROVED` status.
  * You cannot update an order with `COMPLETED` status. The following attributes and objects are patchable:
+ * @see {@link https://developer.paypal.com/api/orders/v2/#orders_patch}
  */
 export class OrdersPatchRequest extends HttpRequestBase<
   BaseOrderHeaders,
@@ -27,3 +32,8 @@ export class OrdersPatchRequest extends HttpRequestBase<
     return this;
   }
 }
+
+/**
+ * The response body of the OrdersPatchRequest.
+ */
+export type OrdersPatchRequestResult = Order;

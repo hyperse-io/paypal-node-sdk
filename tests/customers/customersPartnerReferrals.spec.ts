@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import { CustomersPartnerReferralsRequest } from 'src/customers/customersPartnerReferralsRequest.js';
 import { createClient } from '../test-utils.js';
 

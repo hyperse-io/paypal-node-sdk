@@ -1,13 +1,14 @@
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type BaseCustomerHeaders } from './types.js';
+import { type BaseCustomerHeaders } from '../types/type-customer.js';
 
 type CustomersPartnerReferralsRequestBody = {
-  //
+  // TODO: Define request body.
 };
 
 /**
- Authorizes payment for an order. The response shows authorization details.
- **/
+ * Authorizes payment for an order. The response shows authorization details.
+ * TODO: Define request body.
+ */
 export class CustomersPartnerReferralsRequest extends HttpRequestBase<
   BaseCustomerHeaders,
   CustomersPartnerReferralsRequestBody
