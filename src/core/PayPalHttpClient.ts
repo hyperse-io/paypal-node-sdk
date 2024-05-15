@@ -1,5 +1,5 @@
 import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
-import packageJson from '../../package.json';
+import packageJson from '../../package.json' with { type: 'json' };
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
 import { type HttpRequestBase } from './HttpRequestBase.js';
