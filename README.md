@@ -10,7 +10,7 @@
 
 This is a part of the next major PayPal SDK. It includes a simplified interface to only provide simple model objects and blueprints for HTTP calls. This repo currently contains functionality for PayPal Checkout APIs which includes [Orders V2](https://developer.paypal.com/docs/api/orders/v2/) and [Payments V2](https://developer.paypal.com/docs/api/payments/v2/).
 
-Please refer to the [PayPal Checkout Integration Guide](https://developer.paypal.com/docs/checkout/) for more information. Also refer to [Setup your SDK](https://developer.paypal.com/docs/checkout/reference/server-integration/setup-sdk/) for additional information about setting up the SDK's.
+Please refer to the [PayPal Checkout Integration Guide](https://developer.paypal.com/docs/checkout/) for more information.
 
 ## Usage
 
@@ -27,18 +27,18 @@ For contirbuting or referrring the samples, You can fork/refer this repository.
 #### Code to Execute:
 
 ```javascript
-import paypal from "@hyperse-io/paypal-node-sdk";
+import { core, orders, payments } from "@hyperse-io/paypal-node-sdk";
 
 // Creating an environment
 let clientId = "<<PAYPAL-CLIENT-ID>>";
 let clientSecret = "<<PAYPAL-CLIENT-SECRET>>";
 // This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
-let client = new paypal.core.PayPalHttpClient(environment);
+let environment = new core.SandboxEnvironment(clientId, clientSecret);
+let client = new core.PayPalHttpClient(environment);
 
 // Construct a request object and set desired parameters
 // Here, OrdersCreateRequest() creates a POST request to /v2/checkout/orders
-let request = new paypal.orders.OrdersCreateRequest();
+let request = new orders.OrdersCreateRequest();
 request.requestBody({
   "intent": "CAPTURE",
   "purchase_units": [
@@ -100,7 +100,7 @@ Before Capturing an order, it should be approved by the buyer using approve link
 
 ```javascript
 let captureOrder = async function (orderId) {
-  request = new paypal.orders.OrdersCaptureRequest(orderId);
+  request = new orders.OrdersCaptureRequest(orderId);
   request.requestBody({});
   // Call API with your client and get a response for your call
   let response = await client.execute(request);
@@ -225,11 +225,9 @@ $ PAYPAL_CLIENT_ID=YOUR_SANDBOX_CLIENT_ID PAYPAL_CLIENT_SECRET=YOUR_SANDBOX_CLIE
 
 ## Samples
 
-You can start off by trying out [creating and capturing an order](https://github.com/paypal/Checkout-NodeJS-SDK/tree/master/samples/CaptureIntentExamples/runAll.js)
+You can start off by trying out [creating and capturing an order](https://github.com/hyperse-io/paypal-node-sdk/tree/main/samples/CaptureIntentExamples/runAll.ts)
 
-To try out different samples for both create and authorize intent check [this link](https://github.com/paypal/Checkout-NodeJS-SDK/tree/master/samples)
-
-Note: Update the `payPalClient.js` with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
+Note: Update the `payPalClient.ts` with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.[creating and capturing an order](https://github.com/hyperse-io/paypal-node-sdk/tree/main/samples/CaptureIntentExamples/runAll.ts)
 
 ## Note
 

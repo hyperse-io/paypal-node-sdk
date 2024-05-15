@@ -66,6 +66,7 @@ type(scope): Message in present tense
 - orders
 - payments
 - customers
+- webhook
 - etc.
 
 If a commit affects more than one package, separate them with a comma:

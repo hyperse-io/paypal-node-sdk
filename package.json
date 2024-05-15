@@ -56,7 +56,6 @@
   },
   "dependencies": {
     "@paypal/paypalhttp": "^1.0.1",
-    "@types/paypal__checkout-server-sdk": "^1.0.8",
     "@types/paypal__paypalhttp": "^1.0.3"
   },
   "devDependencies": {
