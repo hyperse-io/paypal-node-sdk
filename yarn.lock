@@ -787,7 +787,6 @@ __metadata:
     "@paypal/paypalhttp": "npm:^1.0.1"
     "@swc/core": "npm:1.5.7"
     "@types/node": "npm:20.12.12"
-    "@types/paypal__checkout-server-sdk": "npm:^1.0.8"
     "@types/paypal__paypalhttp": "npm:^1.0.3"
     "@types/prettier": "npm:3.0.0"
     "@types/shell-quote": "npm:1.7.5"
@@ -1336,16 +1335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/paypal__checkout-server-sdk@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "@types/paypal__checkout-server-sdk@npm:1.0.8"
-  dependencies:
-    "@types/paypal__paypalhttp": "npm:*"
-  checksum: 10/41fcc27397576cd450a19ce548c50cb6cfccbf1a085c4dd852438ed60b3c66675f03662bb9232f42031bf36d9762607d9e7b2a84507d9a0ac1a884668f544547
-  languageName: node
-  linkType: hard
-
-"@types/paypal__paypalhttp@npm:*, @types/paypal__paypalhttp@npm:^1.0.3":
+"@types/paypal__paypalhttp@npm:^1.0.3":
   version: 1.0.3
   resolution: "@types/paypal__paypalhttp@npm:1.0.3"
   dependencies:
