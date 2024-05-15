@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.5
+
+### Patch Changes
+
+- [`6a9d161`](https://github.com/hyperse-io/paypal-node-sdk/commit/6a9d161314a075aff0bcf3d89c9916a7a083c724) Thanks [@tianyingchun](https://github.com/tianyingchun)! - Add with {type:json} for package.json importer
+
 ## 1.0.4
 
 ### Patch Changes
