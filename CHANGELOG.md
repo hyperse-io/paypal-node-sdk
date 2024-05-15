@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.2
+
+### Patch Changes
+
+- [`f1e4528`](https://github.com/hyperse-io/paypal-node-sdk/commit/f1e45289ebd98fc9c22909173d6a7bf07a9af211) Thanks [@tianyingchun](https://github.com/tianyingchun)! - release 1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
