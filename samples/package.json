@@ -1,8 +1,10 @@
 {
   "name": "paypal-checkout-sdk-samples",
   "version": "1.0.1",
+  "type": "module",
   "description": "NodeJS SDK for PayPal Checkout APIs",
   "keywords": [],
+  "private": true,
   "homepage": "",
   "author": "",
   "main": "index",
@@ -17,7 +19,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@paypal/checkout-server-sdk": "^1.0.2"
+    "@hyperse-io/paypal-node-sdk": "workspace:*"
   },
   "license": "MIT",
   "scripts": {

@@ -1,37 +1,33 @@
+import { HttpRequestBase } from '../core/HttpRequestBase.js';
+
+type OrdersCreateRequestBody = {
+  //
+};
+
 /**
- Creates an order.
- **/
-
-export class OrdersCreateRequest {
-  public path: string;
-  public verb: 'POST';
-  public body: any;
-  public headers: {
-    'Content-Type': string;
-    'PayPal-Partner-Attribution-Id'?: string;
-    Prefer?: string;
-  };
-
+ * Creates an order.
+ */
+export class OrdersCreateRequest extends HttpRequestBase<OrdersCreateRequestBody> {
   constructor() {
+    super();
     this.path = '/v2/checkout/orders?';
     this.verb = 'POST';
-    this.body = null;
     this.headers = {
       'Content-Type': 'application/json',
     };
   }
 
-  payPalPartnerAttributionId(payPalPartnerAttributionId) {
+  payPalPartnerAttributionId(payPalPartnerAttributionId: string) {
     this.headers['PayPal-Partner-Attribution-Id'] = payPalPartnerAttributionId;
     return this;
   }
 
-  prefer(prefer) {
+  prefer(prefer: string) {
     this.headers['Prefer'] = prefer;
     return this;
   }
 
-  requestBody(order) {
+  requestBody(order: OrdersCreateRequestBody) {
     this.body = order;
     return this;
   }

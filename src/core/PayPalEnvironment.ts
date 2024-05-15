@@ -36,7 +36,7 @@ export class PayPalEnvironment extends paypalhttp.Environment {
    * @return - The authorization header value
    */
   authorizationString() {
-    const encoded = new Buffer(
+    const encoded = Buffer.from(
       `${this.clientId}:${this.clientSecret}`
     ).toString('base64');
 
@@ -48,7 +48,7 @@ export class PayPalEnvironment extends paypalhttp.Environment {
  * Sandbox Environment
  */
 export class SandboxEnvironment extends PayPalEnvironment {
-  constructor(clientId, clientSecret) {
+  constructor(clientId: string, clientSecret: string) {
     super(clientId, clientSecret, SANDBOX, SANDBOX_WEB_URL);
   }
 }
@@ -57,7 +57,7 @@ export class SandboxEnvironment extends PayPalEnvironment {
  * Live Environment
  */
 export class LiveEnvironment extends PayPalEnvironment {
-  constructor(clientId, clientSecret) {
+  constructor(clientId: string, clientSecret: string) {
     super(clientId, clientSecret, LIVE, LIVE_WEB_URL);
   }
 }

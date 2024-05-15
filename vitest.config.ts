@@ -11,7 +11,7 @@ export default defineConfig({
       { find: /^(@\/.*)\.js$/, replacement: '$1.ts' },
     ],
   },
-  cacheDir: '.cache/vitest/hyperse',
+  cacheDir: '.cache/vitest/main',
   test: {
     // Makebe suite for local debug
     testTimeout: 50000000,

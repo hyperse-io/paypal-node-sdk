@@ -1,14 +1,5 @@
-'use strict';
-
-/**
- * PayPal Node JS SDK dependency
- */
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-
-/**
- * PayPal HTTP client dependency
- */
-const payPalClient = require('../Common/payPalClient');
+import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { createClient } from 'samples/Common/payPalClient.js';
 
 /**
  * Setting up the complete JSON request body for creating the Order. The Intent
@@ -19,6 +10,7 @@ function buildCompleteRequestBody() {
   return {
     intent: 'AUTHORIZE',
     application_context: {
+      // eslint-disable-next-line sonarjs/no-duplicate-string
       return_url: 'https://www.example.com',
       cancel_url: 'https://www.example.com',
       brand_name: 'EXAMPLE INC',
@@ -140,12 +132,12 @@ function buildMinimumRequestBody() {
  * complete request body. It uses the JSON body returned by
  * buildCompleteRequestBody() to create an new Order.
  */
-async function createOrderWithCompletePayload(debug = false) {
+export async function createOrderWithCompletePayload(debug = false) {
   try {
-    const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
+    const request = new OrdersCreateRequest();
     request.headers['prefer'] = 'return=representation';
     request.requestBody(buildCompleteRequestBody());
-    const response = await payPalClient.client().execute(request);
+    const response = await createClient().execute(request);
     if (debug) {
       console.log('Creating Order with Complete Payload:');
       console.log('Status Code: ' + response.statusCode);
@@ -153,11 +145,11 @@ async function createOrderWithCompletePayload(debug = false) {
       console.log('Order ID: ' + response.result.id);
       console.log('Intent: ' + response.result.intent);
       console.log('Links: ');
-      response.result.links.forEach((item, index) => {
-        let rel = item.rel;
-        let href = item.href;
-        let method = item.method;
-        let message = `\t${rel}: ${href}\tCall Type: ${method}`;
+      response.result.links.forEach((item) => {
+        const rel = item.rel;
+        const href = item.href;
+        const method = item.method;
+        const message = `\t${rel}: ${href}\tCall Type: ${method}`;
         console.log(message);
       });
       console.log(
@@ -178,12 +170,12 @@ async function createOrderWithCompletePayload(debug = false) {
  * required fields in the request payload. It uses the JSON body returned by
  * buildMinimumRequestBody() to create an new Order.
  */
-async function createOrderWithPartialPayload(debug = false) {
+export async function createOrderWithPartialPayload(debug = false) {
   try {
-    const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
+    const request = new OrdersCreateRequest();
     request.prefer('return=representation');
     request.requestBody(buildMinimumRequestBody());
-    const response = await payPalClient.client().execute(request);
+    const response = await createClient().execute(request);
     if (debug) {
       console.log('Creating Order with Partial Payload:');
       console.log('Status Code: ' + response.statusCode);
@@ -191,11 +183,11 @@ async function createOrderWithPartialPayload(debug = false) {
       console.log('Order ID: ' + response.result.id);
       console.log('Intent: ' + response.result.intent);
       console.log('Links: ');
-      response.result.links.forEach((item, index) => {
-        let rel = item.rel;
-        let href = item.href;
-        let method = item.method;
-        let message = `\t${rel}: ${href}\tCall Type: ${method}`;
+      response.result.links.forEach((item) => {
+        const rel = item.rel;
+        const href = item.href;
+        const method = item.method;
+        const message = `\t${rel}: ${href}\tCall Type: ${method}`;
         console.log(message);
       });
       console.log(
@@ -210,22 +202,3 @@ async function createOrderWithPartialPayload(debug = false) {
     console.log(e);
   }
 }
-
-/**
- * This is the driver function which invokes the createOrder function to create
- * an sample order.
- */
-if (require.main === module) {
-  createOrderWithCompletePayload(true);
-  createOrderWithPartialPayload(true);
-}
-
-/**
- * Exports the Create Order functions. If needed this can be invoked from the
- * order modules to execute the end to flow like create order, retrieve, capture
- * and refund(Optional)
- */
-module.exports = {
-  createOrder: createOrderWithCompletePayload,
-  createOrderWithPartialPayload: createOrderWithPartialPayload,
-};

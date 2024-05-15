@@ -1,20 +1,17 @@
 /**
- Shows details for a refund, by ID.
- **/
+ * Shows details for a refund, by ID.
+ */
+import { HttpRequestBase } from '../core/HttpRequestBase.js';
 
-export class ReferencedPayoutsItemsRequest {
-  public path: string;
-  public verb: 'POST';
-  public body: any;
-  public headers: {
-    'Content-Type': string;
-    'PayPal-Partner-Attribution-Id'?: string;
-  };
+type ReferencedPayoutsItemsRequestBody = {
+  //
+};
 
+export class ReferencedPayoutsItemsRequest extends HttpRequestBase<ReferencedPayoutsItemsRequestBody> {
   constructor() {
+    super();
     this.path = '/v1/payments/referenced-payouts-items?';
     this.verb = 'POST';
-    this.body = null;
     this.headers = {
       'Content-Type': 'application/json',
     };
@@ -25,7 +22,7 @@ export class ReferencedPayoutsItemsRequest {
     return this;
   }
 
-  requestBody(order) {
+  requestBody(order: ReferencedPayoutsItemsRequestBody) {
     this.body = order;
     return this;
   }

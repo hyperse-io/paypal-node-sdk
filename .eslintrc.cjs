@@ -16,12 +16,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
-  ignorePatterns: [
-    ...getDefaultIgnorePatterns(),
-    'src/custom-admin-ui/admin-ui',
-  ],
+  ignorePatterns: [...getDefaultIgnorePatterns()],
   extends: [
     '@armit/eslint-config-bases/typescript',
+    '@armit/eslint-config-bases/sonar',
+    '@armit/eslint-config-bases/regexp',
+    '@armit/eslint-config-bases/vitest',
     // Apply prettier and disable incompatible rules
     '@armit/eslint-config-bases/prettier',
   ],

@@ -1,17 +1,16 @@
-'use strict';
-
-/**
- * PayPal Node JS SDK dependency
- */
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
+import {
+  LiveEnvironment,
+  PayPalHttpClient,
+  SandboxEnvironment,
+} from '@hyperse-io/paypal-node-sdk';
 
 /**
  * Returns PayPal HTTP client instance with environment which has access
  * credentials context. This can be used invoke PayPal API's provided the
  * credentials have the access to do so.
  */
-function client() {
-  return new checkoutNodeJssdk.core.PayPalHttpClient(environment());
+export function createClient() {
+  return new PayPalHttpClient(environment());
 }
 
 /**
@@ -20,24 +19,25 @@ function client() {
  * LiveEnvironment.
  */
 function environment() {
-  let clientId = process.env.PAYPAL_CLIENT_ID || '<<CLIENT-ID>>';
-  let clientSecret = process.env.PAYPAL_CLIENT_SECRET || '<<CLIENT-SECRET>>';
+  const clientId = process.env.PAYPAL_CLIENT_ID || '<<CLIENT-ID>>';
+  const clientSecret = process.env.PAYPAL_CLIENT_SECRET || '<<CLIENT-SECRET>>';
 
   if (process.env.NODE_ENV === 'production') {
-    return new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret);
+    return new LiveEnvironment(clientId, clientSecret);
   }
 
-  return new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret);
+  return new SandboxEnvironment(clientId, clientSecret);
 }
 
-async function prettyPrint(jsonData, pre = '') {
+export async function prettyPrint(jsonData, pre = '') {
   let pretty = '';
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  for (let key in jsonData) {
+  for (const key in jsonData) {
+    // eslint-disable-next-line no-prototype-builtins
     if (jsonData.hasOwnProperty(key)) {
-      if (isNaN(key)) pretty += pre + capitalize(key) + ': ';
+      if (isNaN(key as any)) pretty += pre + capitalize(key) + ': ';
       else pretty += pre + (parseInt(key) + 1) + ': ';
       if (typeof jsonData[key] === 'object') {
         pretty += '\n';
@@ -49,5 +49,3 @@ async function prettyPrint(jsonData, pre = '') {
   }
   return pretty;
 }
-
-module.exports = { client: client, prettyPrint: prettyPrint };

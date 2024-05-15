@@ -1,10 +1,7 @@
-'use strict';
-
-const client = require('./payPalClient').client;
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-const createOrder =
-  require('../AuthorizeIntentExamples/createOrder').createOrder;
-const getOrder = require('./getOrder').getOrder;
+import { OrdersPatchRequest } from '../../src/orders/ordersPatchRequest.js';
+import { createOrder } from '../CaptureIntentExamples/createOrder.js';
+import { getOrder } from './getOrder.js';
+import { createClient } from './payPalClient.js';
 
 function buildRequestBody() {
   return [
@@ -35,9 +32,9 @@ function buildRequestBody() {
 }
 
 async function patchOrder(orderId) {
-  let request = new checkoutNodeJssdk.orders.OrdersPatchRequest(orderId);
+  const request = new OrdersPatchRequest(orderId);
   request.requestBody(buildRequestBody());
-  let response = await client().execute(request);
+  const response = await createClient().execute(request);
   console.log('PATCH Status Code: ' + response.statusCode);
   // To toggle print the whole body comment/uncomment the below line
   console.log(JSON.stringify(response.result, null, 4));
@@ -46,9 +43,9 @@ async function patchOrder(orderId) {
 if (require.main === module) {
   (async () => {
     console.log('Before PATCH:');
-    let response = await createOrder(true);
+    const response = await createOrder(true);
     console.log('\nAfter PATCH (Changed Intent and Amount):');
-    await patchOrder(response.result.id);
-    await getOrder(response.result.id);
+    await patchOrder(response?.result.id);
+    await getOrder(response?.result.id);
   })();
 }

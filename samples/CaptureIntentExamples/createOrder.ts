@@ -1,14 +1,5 @@
-'use strict';
-
-/**
- * PayPal SDK dependency
- */
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-
-/**
- * PayPal HTTP client dependency
- */
-const payPalClient = require('../Common/payPalClient');
+import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { createClient } from 'tests/test-utils.js';
 
 /**
  * Setting up the JSON request body for creating the Order. The Intent in the
@@ -115,23 +106,23 @@ function buildRequestBody() {
  * This is the sample function which can be sued to create an order. It uses the
  * JSON body returned by buildRequestBody() to create an new Order.
  */
-async function createOrder(debug = false) {
+export async function createOrder(debug = false) {
   try {
-    const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
+    const request = new OrdersCreateRequest();
     request.headers['prefer'] = 'return=representation';
     request.requestBody(buildRequestBody());
-    const response = await payPalClient.client().execute(request);
+    const response = await createClient().execute(request);
     if (debug) {
       console.log('Status Code: ' + response.statusCode);
       console.log('Status: ' + response.result.status);
       console.log('Order ID: ' + response.result.id);
       console.log('Intent: ' + response.result.intent);
       console.log('Links: ');
-      response.result.links.forEach((item, index) => {
-        let rel = item.rel;
-        let href = item.href;
-        let method = item.method;
-        let message = `\t${rel}: ${href}\tCall Type: ${method}`;
+      response.result.links.forEach((item) => {
+        const rel = item.rel;
+        const href = item.href;
+        const method = item.method;
+        const message = `\t${rel}: ${href}\tCall Type: ${method}`;
         console.log(message);
       });
       console.log(
@@ -145,19 +136,3 @@ async function createOrder(debug = false) {
     console.log(e);
   }
 }
-
-/**
- * This is the driver function which invokes the createOrder function to create
- * an sample order.
- */
-if (require.main === module) {
-  (async () => await createOrder(true))();
-}
-
-/**
- * Exports the Create Order function. If needed this can be invoked from the
- * order modules to execute the end to flow like create order, retrieve, capture
- * and refund(Optional)
- */
-
-module.exports = { createOrder: createOrder };

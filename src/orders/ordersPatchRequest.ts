@@ -1,5 +1,9 @@
 import querystring from 'querystring';
+import { HttpRequestBase } from '../core/HttpRequestBase.js';
 
+type OrderPatchRequestBody = {
+  // TODO:
+};
 /**
  * Updates an order. You can update an order with `CREATED` or `APPROVED` status.
  * You cannot update an order with `COMPLETED` status. The following attributes and objects are patchable:
@@ -20,27 +24,19 @@ import querystring from 'querystring';
  *   <li><code>purchase_units[].amount</code>. Supported operation is <code>replace</code>.</li>
  * /ul>
  * ```
- * **/
-
-export class OrdersPatchRequest {
-  public path: string;
-  public verb: 'PATCH';
-  public body: any;
-  public headers: {
-    'Content-Type': string;
-  };
-
-  constructor(orderId) {
+ */
+export class OrdersPatchRequest extends HttpRequestBase<OrderPatchRequestBody> {
+  constructor(orderId: string) {
+    super();
     this.path = '/v2/checkout/orders/{order_id}?';
     this.path = this.path.replace('{order_id}', querystring.escape(orderId));
     this.verb = 'PATCH';
-    this.body = null;
     this.headers = {
       'Content-Type': 'application/json',
     };
   }
 
-  requestBody(patchRequest) {
+  requestBody(patchRequest: OrderPatchRequestBody) {
     this.body = patchRequest;
     return this;
   }

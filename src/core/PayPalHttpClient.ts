@@ -1,5 +1,4 @@
-import paypalhttp from '@paypal/paypalhttp';
-
+import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
 import packageJson from '../../package.json';
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
@@ -10,14 +9,15 @@ import { TokenCache } from './TokenCache.js';
  * PayPal Http client
  */
 export class PayPalHttpClient extends paypalhttp.HttpClient {
-  private _cache: any;
-  private refreshToken: string;
+  private _cache: TokenCache;
+
+  public refreshToken?: string;
 
   /**
    * @param  environment - The environment for this client
    * @param refreshToken - The refreshToken to be used to generate the access Token.
    */
-  constructor(environment: PayPalEnvironment, refreshToken: string) {
+  constructor(environment: PayPalEnvironment, refreshToken?: string) {
     super(environment);
     this._cache = TokenCache.cacheForEnvironment(environment, refreshToken);
     this.refreshToken = refreshToken;
@@ -35,7 +35,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
    * @param {Object} request - The current request for the client
    * @return {Promise.<any>} Promise that fetches a new access Token
    */
-  private authInjector = (request) => {
+  private authInjector = (request: HttpRequest) => {
     if (request.headers.Authorization) {
       return;
     }
@@ -73,7 +73,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     );
   }
 
-  execute(request) {
+  execute(request: HttpRequest) {
     return super.execute(request).catch((err) => {
       if (err.statusCode === 401) {
         return this._retryRequest(request);
@@ -82,7 +82,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     });
   }
 
-  _retryRequest(request) {
+  _retryRequest(request: HttpRequest) {
     const promise = this._cache.wait(request).then(() => {
       this._setAuthHeader(request);
       return super.execute(request);
@@ -127,10 +127,10 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
    * @private
    * @return {void}
    */
-  _setAuthHeader(request) {
+  _setAuthHeader(request: HttpRequest) {
     const token = this._cache.getToken();
 
     request.headers = request.headers || {};
-    request.headers.Authorization = token.authorizationString();
+    request.headers.Authorization = token?.authorizationString();
   }
 }

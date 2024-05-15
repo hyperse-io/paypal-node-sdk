@@ -1,10 +1,8 @@
-'use strict';
+/* eslint-disable sonarjs/no-duplicate-string */
+import { CustomersPartnerReferralsRequest } from 'src/customers/customersPartnerReferralsRequest.js';
+import { createClient } from '../test-utils.js';
 
-require('../spec_helper');
-const chai = require('chai');
-const client = require('../test_harness').client();
-const CustomersPartnerReferralsRequest =
-  paypal.customers.CustomersPartnerReferralsRequest;
+const client = createClient();
 
 function buildRequestBody() {
   return {
@@ -289,42 +287,37 @@ function buildRequestBody() {
 }
 
 function generateCustomersPartnerReferrals() {
-  let request = new CustomersPartnerReferralsRequest();
+  const request = new CustomersPartnerReferralsRequest();
   request.requestBody(buildRequestBody());
   return client.execute(request);
 }
-describe('CustomersPartnerReferralsRequest', function () {
-  it('generate an partner referals', function () {
-    return generateCustomersPartnerReferrals().then((generateResponse) => {
-      chai.assert.equal(generateResponse.statusCode, 201);
-      chai.assert.isNotNull(generateResponse.result);
 
-      let generateCustomersPartnerReferrals = generateResponse.result;
-      chai.assert.isArray(generateCustomersPartnerReferrals.links);
-      chai.assert.equal(2, generateCustomersPartnerReferrals.links.length);
+describe('CustomersPartnerReferralsRequest', () => {
+  it('generate an partner referals', async () => {
+    const generateResponse = await generateCustomersPartnerReferrals();
+    const customersPartnerReferrals = generateResponse.result;
+    expect(generateResponse.statusCode).toBe(201);
+    expect(customersPartnerReferrals).not.toBeNull();
 
-      let firstPartnerReferralsLink =
-        generateCustomersPartnerReferrals.links[0];
-      chai.assert.isNotNull(firstPartnerReferralsLink.href);
-      chai.assert.equal('self', firstPartnerReferralsLink.rel);
-      chai.assert.equal('GET', firstPartnerReferralsLink.method);
-      chai.assert.isNotNull(firstPartnerReferralsLink.description);
+    expect(Array.isArray(customersPartnerReferrals.links)).toBe(true);
+    expect(customersPartnerReferrals.links.length).toBe(2);
 
-      chai.assert.isNotNull(generateCustomersPartnerReferrals.links);
+    const firstPartnerReferralsLink = customersPartnerReferrals.links[0];
 
-      var actionURL = false;
-      for (let link of generateCustomersPartnerReferrals.links) {
-        if ('action_url' === link.rel) {
-          actionURL = true;
-          chai.assert.isNotNull(link.href);
-          chai.assert.equal('GET', link.method);
-        }
+    expect(firstPartnerReferralsLink.href).not.toBeNull();
+    expect(firstPartnerReferralsLink.rel).toBe('self');
+    expect(firstPartnerReferralsLink.method).toBe('GET');
+    expect(firstPartnerReferralsLink.description).not.toBeNull();
+    expect(customersPartnerReferrals.links).not.toBeNull();
+
+    let actionURL = false;
+    for (const link of customersPartnerReferrals.links) {
+      if ('action_url' === link.rel) {
+        actionURL = true;
+        expect(link.href).not.toBeNull();
+        expect(link.method).toBe('GET');
       }
-      chai.assert.isTrue(actionURL);
-    });
+    }
+    chai.assert.isTrue(actionURL);
   });
 });
-
-module.exports = {
-  GenerateCustomersPartnerReferrals: generateCustomersPartnerReferrals,
-};

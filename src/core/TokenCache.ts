@@ -1,17 +1,23 @@
 import { EventEmitter } from 'events';
+import { type HttpRequest } from '@paypal/paypalhttp';
+import { type AccessToken } from './AccessToken.js';
+import { type PayPalEnvironment } from './PayPalEnvironment.js';
 
-const _cacheMap = {};
+const _cacheMap: Record<string, TokenCache> = {};
 
 /**
  * Stores token, token status and a request queue for every client
  */
 export class TokenCache {
-  private _token: any;
+  private _token: AccessToken | null;
   private _locked: boolean;
-  private _requests: any[];
+  private _requests: HttpRequest[];
   private _emitter: EventEmitter;
 
-  static cacheForEnvironment(environment, refreshToken) {
+  static cacheForEnvironment(
+    environment: PayPalEnvironment,
+    refreshToken?: string
+  ) {
     let key = environment.clientId;
 
     if (refreshToken) {
@@ -46,7 +52,7 @@ export class TokenCache {
    * @param {AccessToken|null} token - The current token for the client or null to remove it
    * @return {void}
    */
-  setToken(token) {
+  setToken(token: AccessToken | null) {
     this._token = token;
   }
 
@@ -63,7 +69,7 @@ export class TokenCache {
   }
 
   isValid() {
-    return this.isPresent() && !this._token.isExpired();
+    return this.isPresent() && !this._token?.isExpired();
   }
 
   isPresent() {
@@ -75,7 +81,7 @@ export class TokenCache {
    * @param {Object} request - The request to be queued
    * @return {Promise} - A promise that will resolve or rejects when the notify method is called
    * */
-  wait(request) {
+  wait(request: HttpRequest) {
     this._requests.push(request);
     return new Promise((resolve, reject) => {
       const completeHandler = (req) => {
@@ -99,7 +105,7 @@ export class TokenCache {
    * @param {Array} [err] - An optional error that rejects all requests instead of resolving them
    * @return {void} - void
    */
-  notify(err) {
+  notify(err?) {
     if (err) {
       this._emitter.emit('fail', err);
     } else {

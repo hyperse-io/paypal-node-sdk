@@ -1,20 +1,19 @@
-const client = require('./payPalClient').client;
-const authToken = require('./payPalClient').authentication;
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-const prettyPrint = require('./payPalClient').prettyPrint;
+import { OrdersCreateRequest } from '@hyperse-io/paypal-node-sdk';
+import { createClient, prettyPrint } from './payPalClient.js';
+
 /**
  * Body has no required parameters (intent, purchase_units)
  */
 async function createError1() {
   try {
-    const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
+    const request = new OrdersCreateRequest();
     request.prefer('return=representation');
     request.requestBody({});
     console.log(`Request Body:\n${JSON.stringify(request.body, null, 4)}`);
     console.log('Response:');
-    const response = await client().execute(request);
-  } catch (e) {
-    let message = JSON.parse(e.message);
+    await createClient().execute(request);
+  } catch (e: any) {
+    const message = JSON.parse(e.message);
     console.log(await prettyPrint(message));
   }
 }
@@ -24,7 +23,7 @@ async function createError1() {
  */
 async function createError2() {
   try {
-    const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
+    const request = new OrdersCreateRequest();
     request.prefer('return=representation');
     request.requestBody({
       intent: 'INVALID',
@@ -32,9 +31,9 @@ async function createError2() {
     });
     console.log(`Request Body:\n${JSON.stringify(request.body, null, 4)}`);
     console.log('Response:');
-    const response = await client().execute(request);
-  } catch (e) {
-    let message = JSON.parse(e.message);
+    await createClient().execute(request);
+  } catch (e: any) {
+    const message = JSON.parse(e.message);
     console.log('Status Code:', e.statusCode);
     console.log(await prettyPrint(message));
   }

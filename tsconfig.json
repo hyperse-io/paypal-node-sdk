@@ -7,7 +7,9 @@
     "allowJs": false,
     "noEmit": false,
     "incremental": true,
-    "paths": {},
+    "paths": {
+      "@hyperse-io/paypal-node-sdk": ["./src/index.js"]
+    },
     "types": ["@types/node", "vitest/globals"]
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
