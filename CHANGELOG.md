@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.6
+
+### Patch Changes
+
+- [`2242686`](https://github.com/hyperse-io/paypal-node-sdk/commit/22426866fe9ed2e193e3f9f5ad96a3d4092b3ab2) Thanks [@tianyingchun](https://github.com/tianyingchun)! - fix typings of amountBreakdown
+
 ## 1.0.5
 
 ### Patch Changes
