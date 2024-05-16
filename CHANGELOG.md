@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.7
+
+### Patch Changes
+
+- [`50b95f5`](https://github.com/hyperse-io/paypal-node-sdk/commit/50b95f58d2526f7bdfd39e4b104ea7aa17782141) Thanks [@tianyingchun](https://github.com/tianyingchun)! - update typings exports
+
 ## 1.0.6
 
 ### Patch Changes
