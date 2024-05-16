@@ -46,13 +46,13 @@ export interface AddressPortable {
 
 // https://developer.paypal.com/docs/api/payments/v2/#definition-amount_breakdown
 export interface AmountBreakdown {
-  discount: Money;
-  handling: Money;
-  insurance: Money;
-  item_total: Money;
-  shipping_discount: Money;
-  shipping: Money;
-  tax_total: Money;
+  discount?: Money;
+  handling?: Money;
+  insurance?: Money;
+  item_total?: Money;
+  shipping_discount?: Money;
+  shipping?: Money;
+  tax_total?: Money;
 }
 
 // https://developer.paypal.com/docs/api/payments/v2/#definition-authorization
