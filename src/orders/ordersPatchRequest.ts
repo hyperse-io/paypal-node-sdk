@@ -1,10 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Order,
-  type BaseOrderHeaders,
-  type Patch,
-} from '../types/type-order.js';
+import { type BaseOrderHeaders, type Patch } from '../types/type-order.js';
 
 type OrderPatchRequestBody = Patch[];
 
@@ -32,8 +28,3 @@ export class OrdersPatchRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body of the OrdersPatchRequest.
- */
-export type OrdersPatchRequestResult = Order;

@@ -86,3 +86,14 @@ export interface WebhookEvent {
 export interface BaseWebhookHeaders extends BaseHeaders {
   'Content-Type': 'application/json';
 }
+
+/**
+ * The response body of the VerifyWebhookSignature.
+ */
+export type VerifyWebhookSignatureResult = {
+  /**
+   * The status of the signature verification.
+   * Enum: "SUCCESS" "FAILURE"
+   */
+  verification_status: 'SUCCESS' | 'FAILURE';
+};

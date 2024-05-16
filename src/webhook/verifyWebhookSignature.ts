@@ -1,11 +1,10 @@
-import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
   type WebhookEvent,
   type BaseWebhookHeaders,
 } from '../types/type-webhook.js';
 
-type VerifyWebhookSignatureBody = {
+export type VerifyWebhookSignatureBody = {
   /**
    * The ID of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-ID header of the notification message.
    * '69cd13f0-d67a-11e5-baa3-778b53f4ae55';
@@ -49,13 +48,9 @@ export class VerifyWebhookSignature extends HttpRequestBase<
   BaseWebhookHeaders,
   VerifyWebhookSignatureBody
 > {
-  constructor(authorizationId) {
+  constructor() {
     super();
     this.path = '/v1/notifications/verify-webhook-signature?';
-    this.path = this.path.replace(
-      '{authorization_id}',
-      querystring.escape(authorizationId)
-    );
     this.verb = 'POST';
     this.headers = {
       'Content-Type': 'application/json',
@@ -81,14 +76,3 @@ export class VerifyWebhookSignature extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body of the VerifyWebhookSignature.
- */
-export type VerifyWebhookSignatureResult = {
-  /**
-   * The status of the signature verification.
-   * Enum: "SUCCESS" "FAILURE"
-   */
-  verification_status: 'SUCCESS' | 'FAILURE';
-};

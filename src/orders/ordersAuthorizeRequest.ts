@@ -3,7 +3,6 @@ import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
   type PaymentSource,
   type BaseOrderHeaders,
-  type Order,
 } from '../types/type-order.js';
 
 export type OrdersAuthorizeRequestBody = {
@@ -59,8 +58,3 @@ export class OrdersAuthorizeRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body contains the authorization details.
- */
-export type OrdersAuthorizeRequestResult = Order;

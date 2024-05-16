@@ -1,10 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Money,
-  type BasePaymentHeaders,
-  type Capture,
-} from '../types/type-payment.js';
+import { type Money, type BasePaymentHeaders } from '../types/type-payment.js';
 
 type AuthorizationsReauthorizeRequestBody = {
   amount: Money;
@@ -56,8 +52,3 @@ export class AuthorizationsReauthorizeRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response for reauthorizing a payment, by ID.
- */
-export type AuthorizationsReauthorizeRequestResult = Capture;

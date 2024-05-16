@@ -5,7 +5,6 @@ import {
   type Payer,
   type PurchaseUnitRequest,
   type OrderApplicationContext,
-  type Order,
 } from '../types/type-order.js';
 
 export type OrdersCreateRequestBody = {
@@ -57,8 +56,3 @@ export class OrdersCreateRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body of the OrdersCreateRequest.
- */
-export type OrdersCreateRequestResult = Order;

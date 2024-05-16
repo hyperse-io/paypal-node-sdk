@@ -401,6 +401,11 @@ export interface PurchaseUnit {
 // https://developer.paypal.com/docs/api/orders/v2/#definition-purchase_unit_request
 export interface PurchaseUnitRequest {
   amount: AmountWithBreakdown;
+  /**
+   * [ 1 .. 127 ] characters
+   * The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions.
+   * Appears in transaction and settlement reports but is not visible to the payer.
+   */
   custom_id?: string;
   description?: string;
   invoice_id?: string;

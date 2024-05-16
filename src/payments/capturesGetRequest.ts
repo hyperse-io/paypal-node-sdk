@@ -1,9 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Capture,
-  type BasePaymentHeaders,
-} from '../types/type-payment.js';
+import { type BasePaymentHeaders } from '../types/type-payment.js';
 
 /**
  * Captures Get
@@ -24,8 +21,3 @@ export class CapturesGetRequest extends HttpRequestBase<BasePaymentHeaders> {
     };
   }
 }
-
-/**
- * The response body of the CapturesGetRequest.
- */
-export type CapturesGetRequestResult = Capture;

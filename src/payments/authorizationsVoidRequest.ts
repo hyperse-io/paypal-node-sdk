@@ -1,9 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Capture,
-  type BasePaymentHeaders,
-} from '../types/type-payment.js';
+import { type BasePaymentHeaders } from '../types/type-payment.js';
 
 interface AuthorizationsVoidRequestHeaders extends BasePaymentHeaders {
   'PayPal-Auth-Assertion'?: string;
@@ -27,8 +24,3 @@ export class AuthorizationsVoidRequest extends HttpRequestBase<AuthorizationsVoi
     };
   }
 }
-
-/**
- * The response for voiding an authorized payment, by ID.
- */
-export type AuthorizationsVoidRequestResult = Capture;

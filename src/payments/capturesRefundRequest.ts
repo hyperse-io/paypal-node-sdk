@@ -1,10 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Money,
-  type BasePaymentHeaders,
-  type Capture,
-} from '../types/type-payment.js';
+import { type Money, type BasePaymentHeaders } from '../types/type-payment.js';
 
 type CapturesRefundRequestBody = {
   amount: Money;
@@ -26,7 +22,7 @@ export class CapturesRefundRequest extends HttpRequestBase<
   CapturesRefundRequestHeaders,
   CapturesRefundRequestBody
 > {
-  constructor(captureId) {
+  constructor(captureId: string) {
     super();
     this.path = '/v2/payments/captures/{capture_id}/refund?';
     this.path = this.path.replace(
@@ -63,8 +59,3 @@ export class CapturesRefundRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body of the CapturesRefundRequest.
- */
-export type CapturesRefundRequestResult = Capture;

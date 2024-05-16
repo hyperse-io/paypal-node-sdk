@@ -4,7 +4,6 @@ import {
   type PaymentInstruction,
   type Money,
   type BasePaymentHeaders,
-  type Capture,
 } from '../types/type-payment.js';
 
 type AuthorizationsCaptureRequestBody = {
@@ -61,8 +60,3 @@ export class AuthorizationsCaptureRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response body of the AuthorizationsCaptureRequest.
- */
-export type AuthorizationsCaptureRequestResult = Capture;

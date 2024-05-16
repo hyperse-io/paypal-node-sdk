@@ -1,7 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
-  type Order,
   type BaseOrderHeaders,
   type PaymentSource,
 } from '../types/type-order.js';
@@ -60,8 +59,3 @@ export class OrdersCaptureRequest extends HttpRequestBase<
     return this;
   }
 }
-
-/**
- * The response from capturing a payment for an order.
- */
-export type OrdersCaptureRequestResult = Order;

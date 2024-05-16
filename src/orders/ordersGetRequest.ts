@@ -1,6 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type Order, type BaseOrderHeaders } from '../types/type-order.js';
+import { type BaseOrderHeaders } from '../types/type-order.js';
 
 /**
  * Shows details for an order, by ID.
@@ -17,8 +17,3 @@ export class OrdersGetRequest extends HttpRequestBase<BaseOrderHeaders> {
     };
   }
 }
-
-/**
- * The response body of the OrdersGetRequest.
- */
-export type OrdersGetRequestResult = Order;

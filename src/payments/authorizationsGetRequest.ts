@@ -1,9 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import {
-  type Capture,
-  type BasePaymentHeaders,
-} from '../types/type-payment.js';
+import { type BasePaymentHeaders } from '../types/type-payment.js';
 
 /**
  * Shows details for an authorized payment, by ID.
@@ -23,8 +20,3 @@ export class AuthorizationsGetRequest extends HttpRequestBase<BasePaymentHeaders
     };
   }
 }
-
-/**
- * The response body of the AuthorizationsGetRequest.
- */
-export type AuthorizationsGetRequestResult = Capture;

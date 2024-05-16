@@ -1,5 +1,5 @@
+import { readFileSync } from 'fs';
 import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
-import packageJson from '../../package.json' with { type: 'json' };
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
 import { type HttpRequestBase } from './HttpRequestBase.js';
@@ -15,8 +15,8 @@ import { TokenCache } from './TokenCache.js';
 
 export class PayPalHttpClient extends paypalhttp.HttpClient {
   private _cache: TokenCache;
-
   public refreshToken?: string;
+  private package: { version: string };
 
   /**
    * @param  environment - The environment for this client
@@ -27,6 +27,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     this._cache = TokenCache.cacheForEnvironment(environment, refreshToken);
     this.refreshToken = refreshToken;
     this.addInjector(this.authInjector);
+    this.package = JSON.parse(readFileSync('../../package.json', 'utf8'));
     this.addInjector(function (req) {
       req.headers['Accept-Encoding'] = 'gzip';
       req.headers['sdk_name'] = 'Checkout SDK';
@@ -65,7 +66,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
   getUserAgent() {
     return (
       'PayPalSDK/PayPal-node-SDK ' +
-      packageJson.version +
+      this.package.version +
       ' (node ' +
       process.version +
       '-' +

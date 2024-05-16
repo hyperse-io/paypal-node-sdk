@@ -1,1 +1,4 @@
-export { VerifyWebhookSignature } from './verifyWebhookSignature.js';
+export {
+  VerifyWebhookSignature,
+  type VerifyWebhookSignatureBody,
+} from './verifyWebhookSignature.js';
