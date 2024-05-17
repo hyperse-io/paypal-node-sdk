@@ -3,8 +3,22 @@ import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import { type Money, type BasePaymentHeaders } from '../types/type-payment.js';
 
 type CapturesRefundRequestBody = {
+  /**
+   * The amount to refund. To refund a portion of the captured amount, specify an amount.
+   * If amount is not specified, an amount equal to captured amount - previous refunds is refunded.
+   * The amount must be a positive number and in the same currency as the one in which the payment was captured.
+   */
   amount: Money;
-  invoice_id: string;
+  /**
+   * The API caller-provided external invoice ID for this order. The pattern is defined by an external party and supports Unicode.
+   * if we not provide invoice_id, leave this field as `undefined`, do not provide empty string.
+   */
+  invoice_id?: string;
+  /**
+   * The reason for the refund.
+   * Appears in both the payer's transaction history and the emails that the payer receives.
+   * The pattern is defined by an external party and supports Unicode.
+   */
   note_to_payer: string;
 };
 
