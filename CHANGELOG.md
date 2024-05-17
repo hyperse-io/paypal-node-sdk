@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.8
+
+### Patch Changes
+
+- [`4fe8f6e`](https://github.com/hyperse-io/paypal-node-sdk/commit/4fe8f6eaa499eef171a8abd3193c0271d5d2f765) Thanks [@tianyingchun](https://github.com/tianyingchun)! - fix invoice_id as optional parameters
+
 ## 1.0.7
 
 ### Patch Changes
