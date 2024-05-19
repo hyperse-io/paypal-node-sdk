@@ -1,6 +1,6 @@
 {
   "name": "@hyperse-io/paypal-node-sdk",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "NodeJS SDK for PayPal Checkout APIs",
   "keywords": [
     "hyperse",

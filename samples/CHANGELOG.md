@@ -1,5 +1,12 @@
 # paypal-checkout-sdk-samples
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`ba7cfad`](https://github.com/hyperse-io/paypal-node-sdk/commit/ba7cfadb300f71209a796287a20d1bc75e3df201)]:
+  - @hyperse-io/paypal-node-sdk@1.0.9
+
 ## 1.0.9
 
 ### Patch Changes

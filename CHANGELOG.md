@@ -1,5 +1,11 @@
 # @hyperse-io/paypal-node-sdk
 
+## 1.0.9
+
+### Patch Changes
+
+- [`ba7cfad`](https://github.com/hyperse-io/paypal-node-sdk/commit/ba7cfadb300f71209a796287a20d1bc75e3df201) Thanks [@tianyingchun](https://github.com/tianyingchun)! - fix wrong `package.json` path
+
 ## 1.0.8
 
 ### Patch Changes
