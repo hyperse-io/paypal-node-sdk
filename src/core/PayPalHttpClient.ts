@@ -1,10 +1,21 @@
 import { readFileSync } from 'fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
 import { type HttpRequestBase } from './HttpRequestBase.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 import { TokenCache } from './TokenCache.js';
+
+/**
+ * Provider method to simulate __dirname veriable.
+ * @param url import.meta.url
+ * @param paths paths to join.
+ */
+const getDirname = (url: string, ...paths: string[]) => {
+  return join(dirname(fileURLToPath(url)), ...paths);
+};
 
 /**
  * PayPal Http client
@@ -27,7 +38,9 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
     this._cache = TokenCache.cacheForEnvironment(environment, refreshToken);
     this.refreshToken = refreshToken;
     this.addInjector(this.authInjector);
-    this.package = JSON.parse(readFileSync('../../package.json', 'utf8'));
+    this.package = JSON.parse(
+      readFileSync(getDirname(import.meta.url, '../../package.json'), 'utf8')
+    );
     this.addInjector(function (req) {
       req.headers['Accept-Encoding'] = 'gzip';
       req.headers['sdk_name'] = 'Checkout SDK';
