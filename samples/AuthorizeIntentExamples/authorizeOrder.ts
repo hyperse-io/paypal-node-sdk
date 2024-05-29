@@ -1,5 +1,5 @@
 import { createClient } from 'samples/Common/payPalClient.js';
-import { orders } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse/paypal-node-sdk';
 
 /**
  * This function can be used to perform authorization on the approved order.

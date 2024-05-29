@@ -1,5 +1,5 @@
 import { createClient } from 'samples/Common/payPalClient.js';
-import { orders } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse/paypal-node-sdk';
 
 /**
  * Setting up the complete JSON request body for creating the Order. The Intent

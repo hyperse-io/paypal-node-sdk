@@ -1,4 +1,4 @@
-import { orders } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse/paypal-node-sdk';
 import { createOrder } from '../CaptureIntentExamples/createOrder.js';
 import { getOrder } from './getOrder.js';
 import { createClient } from './payPalClient.js';

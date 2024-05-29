@@ -1,5 +1,22 @@
-# @hyperse-io/paypal-node-sdk
+# @hyperse/paypal-node-sdk
 
+<p align="left">
+  <a aria-label="Build" href="https://github.com/hyperse-io/paypal-node-sdk/actions?query=workflow%3ACI">
+    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/hyperse-io/paypal-node-sdk/ci-integrity.yml?branch=main&label=ci&logo=github&style=flat-quare&labelColor=000000" />
+  </a>
+  <a aria-label="stable version" href="https://www.npmjs.com/package/@hyperse/paypal-node-sdk">
+    <img alt="stable version" src="https://img.shields.io/npm/v/%40hyperse%2Fpaypal-node-sdk?branch=main&label=version&logo=npm&style=flat-quare&labelColor=000000" />
+  </a>
+  <a>
+    <img alt="LoC" src="https://img.shields.io/bundlephobia/min/%40hyperse%2Fpaypal-node-sdk?style=flat-quare&labelColor=000000" />
+  </a>
+  <a aria-label="Top language" href="https://github.com/hyperse-io/paypal-node-sdk/search?l=typescript">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/hyperse-io/paypal-node-sdk?style=flat-square&labelColor=000&color=blue">
+  </a>
+  <a aria-label="Licence" href="https://github.com/hyperse-io/paypal-node-sdk/blob/main/LICENSE">
+    <img alt="Licence" src="https://img.shields.io/github/license/hyperse-io/paypal-node-sdk?style=flat-quare&labelColor=000000" />
+  </a>
+</p>
 ## PayPal Checkout API SDK for NodeJS
 
 ![PayPal Developer](/homepage.jpg)
@@ -27,7 +44,7 @@ For contirbuting or referrring the samples, You can fork/refer this repository.
 #### Code to Execute:
 
 ```javascript
-import { core, orders, payments } from '@hyperse-io/paypal-node-sdk';
+import { core, orders, payments } from '@hyperse/paypal-node-sdk';
 
 // Creating an environment
 let clientId = '<<PAYPAL-CLIENT-ID>>';

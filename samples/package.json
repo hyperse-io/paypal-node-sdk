@@ -19,7 +19,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@hyperse-io/paypal-node-sdk": "workspace:*"
+    "@hyperse/paypal-node-sdk": "workspace:*"
   },
   "license": "MIT",
   "scripts": {

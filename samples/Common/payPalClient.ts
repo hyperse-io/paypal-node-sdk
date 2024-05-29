@@ -1,4 +1,4 @@
-import { core } from '@hyperse-io/paypal-node-sdk';
+import { core } from '@hyperse/paypal-node-sdk';
 
 /**
  * Returns PayPal HTTP client instance with environment which has access

@@ -740,9 +740,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperse-io/paypal-node-sdk@workspace:*, @hyperse-io/paypal-node-sdk@workspace:.":
+"@hyperse/paypal-node-sdk@workspace:*, @hyperse/paypal-node-sdk@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@hyperse-io/paypal-node-sdk@workspace:."
+  resolution: "@hyperse/paypal-node-sdk@workspace:."
   dependencies:
     "@changesets/changelog-git": "npm:0.2.0"
     "@changesets/changelog-github": "npm:0.5.0"
@@ -6825,7 +6825,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "paypal-checkout-sdk-samples@workspace:samples"
   dependencies:
-    "@hyperse-io/paypal-node-sdk": "workspace:*"
+    "@hyperse/paypal-node-sdk": "workspace:*"
   languageName: unknown
   linkType: soft
 

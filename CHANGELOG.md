@@ -1,4 +1,4 @@
-# @hyperse-io/paypal-node-sdk
+# @hyperse/paypal-node-sdk
 
 ## 1.0.9
 

@@ -1,4 +1,4 @@
-import { orders } from '@hyperse-io/paypal-node-sdk';
+import { orders } from '@hyperse/paypal-node-sdk';
 import { createClient, prettyPrint } from './payPalClient.js';
 
 /**

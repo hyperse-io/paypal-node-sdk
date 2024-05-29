@@ -1,4 +1,4 @@
-import { payments } from '@hyperse-io/paypal-node-sdk';
+import { payments } from '@hyperse/paypal-node-sdk';
 import { createClient } from './payPalClient.js';
 /**
  * This method can be used to refund the capture. This function should be called
