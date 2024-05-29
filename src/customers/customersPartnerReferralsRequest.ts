@@ -1,9 +1,8 @@
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import { type BaseCustomerHeaders } from '../types/type-customer.js';
 
-type CustomersPartnerReferralsRequestBody = {
-  // TODO: Define request body.
-};
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type CustomersPartnerReferralsRequestBody = {};
 
 /**
  * Authorizes payment for an order. The response shows authorization details.

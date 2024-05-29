@@ -1,5 +1,5 @@
-import { payments } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'samples/Common/payPalClient.js';
+import { payments } from '@hyperse-io/paypal-node-sdk';
 
 /**
  * This function can be used to capture the payment on an authorized Order.

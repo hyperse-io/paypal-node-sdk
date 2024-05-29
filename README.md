@@ -27,11 +27,11 @@ For contirbuting or referrring the samples, You can fork/refer this repository.
 #### Code to Execute:
 
 ```javascript
-import { core, orders, payments } from "@hyperse-io/paypal-node-sdk";
+import { core, orders, payments } from '@hyperse-io/paypal-node-sdk';
 
 // Creating an environment
-let clientId = "<<PAYPAL-CLIENT-ID>>";
-let clientSecret = "<<PAYPAL-CLIENT-SECRET>>";
+let clientId = '<<PAYPAL-CLIENT-ID>>';
+let clientSecret = '<<PAYPAL-CLIENT-SECRET>>';
 // This sample uses SandboxEnvironment. In production, use LiveEnvironment
 let environment = new core.SandboxEnvironment(clientId, clientSecret);
 let client = new core.PayPalHttpClient(environment);
@@ -40,12 +40,12 @@ let client = new core.PayPalHttpClient(environment);
 // Here, OrdersCreateRequest() creates a POST request to /v2/checkout/orders
 let request = new orders.OrdersCreateRequest();
 request.requestBody({
-  "intent": "CAPTURE",
-  "purchase_units": [
+  intent: 'CAPTURE',
+  purchase_units: [
     {
-      "amount": {
-        "currency_code": "USD",
-        "value": "100.00",
+      amount: {
+        currency_code: 'USD',
+        value: '100.00',
       },
     },
   ],
@@ -109,7 +109,7 @@ let captureOrder = async function (orderId) {
   console.log(`Capture: ${JSON.stringify(response.result)}`);
 };
 
-let capture = captureOrder("REPLACE-WITH-APPROVED-ORDER-ID");
+let capture = captureOrder('REPLACE-WITH-APPROVED-ORDER-ID');
 ```
 
 #### Example Output:

@@ -5,10 +5,7 @@ import { fileURLToPath } from 'node:url';
  * A good practice is to override this base configuration in each package and/or application
  * where we are able to add customization depending on the nature of the project (eslint...).
  */
-import {
-  concatFilesForPrettier,
-  getEslintFixCmd,
-} from './lint-staged.common.mjs';
+import { getEslintFixCmd } from './lint-staged.common.mjs';
 
 /**
  * @type {Record<string, (filenames: string[]) => string | string[] | Promise<string | string[]>>}
@@ -21,15 +18,10 @@ const rules = {
       cache: true,
       // when autofixing staged-files a good tip is to disable react-hooks/exhaustive-deps, cause
       // a change here can potentially break things without proper visibility.
-      rules: ['react-hooks/exhaustive-deps: off'],
+      rules: [],
       maxWarnings: 25,
       files: filenames,
     });
-  },
-  '**/*.{json,md,mdx,css,html,yml,yaml,scss,ts,js,tsx,jsx,mjs}': (
-    filenames
-  ) => {
-    return [`prettier --write ${concatFilesForPrettier(filenames)}`];
   },
 };
 

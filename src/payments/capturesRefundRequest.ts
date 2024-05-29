@@ -1,6 +1,6 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
-import { type Money, type BasePaymentHeaders } from '../types/type-payment.js';
+import { type BasePaymentHeaders, type Money } from '../types/type-payment.js';
 
 type CapturesRefundRequestBody = {
   /**

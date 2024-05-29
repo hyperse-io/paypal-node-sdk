@@ -1,6 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./tsconfig.base.json",
+  "extends": "@hyperse/eslint-config-hyperse/tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "./",
     "noImplicitAny": false,
@@ -8,9 +7,20 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "@hyperse-io/paypal-node-sdk": ["./src/index.js"]
+      "@hyperse-io/paypal-node-sdk": [
+        "./src/index.js"
+      ]
     },
-    "types": ["@types/node", "vitest/globals"]
+    "types": [
+      "@types/node",
+      "vitest/globals"
+    ]
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build", "docs/typings"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "dist",
+    "build",
+    "docs/typings"
+  ]
 }

@@ -1,9 +1,9 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
-  type PaymentInstruction,
-  type Money,
   type BasePaymentHeaders,
+  type Money,
+  type PaymentInstruction,
 } from '../types/type-payment.js';
 
 type AuthorizationsCaptureRequestBody = {

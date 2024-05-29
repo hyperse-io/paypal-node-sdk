@@ -1,8 +1,8 @@
 import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
-  type PaymentSource,
   type BaseOrderHeaders,
+  type PaymentSource,
 } from '../types/type-order.js';
 
 export type OrdersAuthorizeRequestBody = {

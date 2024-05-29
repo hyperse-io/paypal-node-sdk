@@ -1,7 +1,7 @@
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
-  type WebhookEvent,
   type BaseWebhookHeaders,
+  type WebhookEvent,
 } from '../types/type-webhook.js';
 
 export type VerifyWebhookSignatureBody = {

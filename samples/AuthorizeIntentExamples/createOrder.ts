@@ -1,5 +1,5 @@
-import { orders } from '@hyperse-io/paypal-node-sdk';
 import { createClient } from 'samples/Common/payPalClient.js';
+import { orders } from '@hyperse-io/paypal-node-sdk';
 
 /**
  * Setting up the complete JSON request body for creating the Order. The Intent
@@ -10,7 +10,6 @@ function buildCompleteRequestBody() {
   return {
     intent: 'AUTHORIZE',
     application_context: {
-      // eslint-disable-next-line sonarjs/no-duplicate-string
       return_url: 'https://www.example.com',
       cancel_url: 'https://www.example.com',
       brand_name: 'EXAMPLE INC',

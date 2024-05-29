@@ -1,10 +1,10 @@
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import {
-  type CheckoutPaymentIntent,
   type BaseOrderHeaders,
+  type CheckoutPaymentIntent,
+  type OrderApplicationContext,
   type Payer,
   type PurchaseUnitRequest,
-  type OrderApplicationContext,
 } from '../types/type-order.js';
 
 export type OrdersCreateRequestBody = {
