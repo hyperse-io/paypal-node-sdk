@@ -1,7 +1,9 @@
 {
   "extends": "@hyperse/eslint-config-hyperse/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist",
     "noImplicitAny": false,
     "allowJs": false,
     "noEmit": false,
