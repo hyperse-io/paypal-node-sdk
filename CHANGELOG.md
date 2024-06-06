@@ -1,5 +1,11 @@
 # @hyperse/paypal-node-sdk
 
+## 2.0.1
+
+### Patch Changes
+
+- [`8585943`](https://github.com/hyperse-io/paypal-node-sdk/commit/85859431fb24a9ebb1e35b55e3296af4daf5344f) Thanks [@tianyingchun](https://github.com/tianyingchun)! - Add `webhooks` apis
+
 ## 2.0.0
 
 ### Major Changes
