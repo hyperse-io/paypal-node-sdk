@@ -1,5 +1,11 @@
 # @hyperse/paypal-node-sdk
 
+## 2.0.2
+
+### Patch Changes
+
+- [`0763824`](https://github.com/hyperse-io/paypal-node-sdk/commit/07638243a6e7362e56edd6c0ea4d9ecddeca1042) Thanks [@tianyingchun](https://github.com/tianyingchun)! - improved typings for OrdersCreateRequest
+
 ## 2.0.1
 
 ### Patch Changes
