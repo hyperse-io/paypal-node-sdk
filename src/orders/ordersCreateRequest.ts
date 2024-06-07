@@ -3,14 +3,24 @@ import {
   type BaseOrderHeaders,
   type CheckoutPaymentIntent,
   type OrderApplicationContext,
-  type Payer,
+  PaymentSourceRequest,
   type PurchaseUnitRequest,
 } from '../types/type-order.js';
 
 export type OrdersCreateRequestBody = {
   intent: CheckoutPaymentIntent;
-  payer?: Payer;
+  /**
+   * The payment source definition.
+   */
+  payment_source?: PaymentSourceRequest;
+  /**
+   * An array of purchase units. Each purchase unit establishes a contract between a payer and the payee.
+   * Each purchase unit represents either a full or partial order that the payer intends to purchase from the payee.
+   */
   purchase_units: PurchaseUnitRequest[];
+  /**
+   * Customizes the payer experience during the approval process for the payment with PayPal.
+   */
   application_context?: OrderApplicationContext;
 };
 
