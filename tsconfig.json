@@ -9,24 +9,10 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "@hyperse/paypal-node-sdk": [
-        "./src/index.js"
-      ]
+      "@hyperse/paypal-node-sdk": ["./src/index.js"]
     },
-    "types": [
-      "@types/node",
-      "vitest/globals"
-    ]
+    "types": ["@types/node", "vitest/globals"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "**/node_modules",
-    "**/.*/",
-    "dist",
-    "build",
-    "docs/typings"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build", "docs/typings"]
 }

@@ -1,6 +1,6 @@
-import { OrdersGetRequest } from 'src/orders/ordersGetRequest.js';
-import { OrdersPatchRequest } from 'src/orders/ordersPatchRequest.js';
-import { createClient } from 'tests/test-utils.js';
+import { OrdersGetRequest } from '../../src/orders/ordersGetRequest.js';
+import { OrdersPatchRequest } from '../../src/orders/ordersPatchRequest.js';
+import { createClient } from '../test-utils.js';
 import { createOrder } from './order-utils.js';
 const client = createClient();
 

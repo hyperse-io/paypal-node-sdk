@@ -1,5 +1,6 @@
-import { OrdersAuthorizeRequest } from 'src/orders/ordersAuthorizeRequest.js';
-import { createClient } from 'tests/test-utils.js';
+import { OrdersAuthorizeRequest } from '../../src/orders/ordersAuthorizeRequest.js';
+import { createClient } from '../test-utils.js';
+
 const client = createClient();
 
 describe('OrdersAuthorizeRequest', () => {

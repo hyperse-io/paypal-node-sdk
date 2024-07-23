@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { SandboxEnvironment } from 'src/core/PayPalEnvironment.js';
-import { PayPalHttpClient } from 'src/core/PayPalHttpClient.js';
+import { SandboxEnvironment } from '../src/core/PayPalEnvironment.js';
+import { PayPalHttpClient } from '../src/core/PayPalHttpClient.js';
 
 function environment() {
   const clientId = process.env.PAYPAL_CLIENT_ID || '<<PAYPAL-CLIENT-ID>>';

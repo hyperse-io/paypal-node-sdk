@@ -1,5 +1,5 @@
-import { OrdersCreateRequest } from 'src/orders/ordersCreateRequest.js';
-import { createClient } from 'tests/test-utils.js';
+import { OrdersCreateRequest } from '../../src/orders/ordersCreateRequest.js';
+import { createClient } from '../test-utils.js';
 
 const client = createClient();
 

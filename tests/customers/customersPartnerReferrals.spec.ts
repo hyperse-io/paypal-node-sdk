@@ -1,4 +1,4 @@
-import { CustomersPartnerReferralsRequest } from 'src/customers/customersPartnerReferralsRequest.js';
+import { CustomersPartnerReferralsRequest } from '../../src/customers/customersPartnerReferralsRequest.js';
 import { createClient } from '../test-utils.js';
 
 const client = createClient();
