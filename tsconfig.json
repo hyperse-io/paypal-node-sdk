@@ -9,6 +9,7 @@
     "allowJs": false,
     "noEmit": false,
     "incremental": true,
+    "strictPropertyInitialization": false,
     "paths": {
       "@hyperse/paypal-node-sdk": ["./src/index.js"]
     },

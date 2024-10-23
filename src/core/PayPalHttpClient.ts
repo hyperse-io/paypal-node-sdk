@@ -54,7 +54,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
    * @param {Object} request - The current request for the client
    * @return {Promise.<any>} Promise that fetches a new access Token
    */
-  private authInjector = (request: HttpRequest) => {
+  private authInjector = (request: HttpRequest): void | Promise<void> => {
     if (request.headers.Authorization) {
       return;
     }
