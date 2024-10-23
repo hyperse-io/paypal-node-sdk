@@ -1,6 +1,6 @@
 {
   "name": "paypal-checkout-sdk-samples",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "type": "module",
   "description": "NodeJS SDK for PayPal Checkout APIs",
   "keywords": [],

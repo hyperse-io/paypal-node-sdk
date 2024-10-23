@@ -1,5 +1,11 @@
 # @hyperse/paypal-node-sdk
 
+## 2.0.4
+
+### Patch Changes
+
+- [#85](https://github.com/hyperse-io/paypal-node-sdk/pull/85) [`62d6f38`](https://github.com/hyperse-io/paypal-node-sdk/commit/62d6f38a215e37d689a40395b0647c2df15e8eee) Thanks [@simplyStyle](https://github.com/simplyStyle)! - complete unit tests and fix the webhook function
+
 ## 2.0.3
 
 ### Patch Changes
