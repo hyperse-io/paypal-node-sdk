@@ -73,8 +73,10 @@
     }
   },
   "dependencies": {
+    "@mswjs/data": "^0.16.2",
     "@paypal/paypalhttp": "^1.0.1",
-    "@types/paypal__paypalhttp": "^1.0.3"
+    "@types/paypal__paypalhttp": "^1.0.3",
+    "msw": "^2.4.11"
   },
   "devDependencies": {
     "@changesets/changelog-git": "0.2.0",

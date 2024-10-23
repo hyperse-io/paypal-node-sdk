@@ -20,7 +20,7 @@ type WebhookUpdateRequestBody = {
   /**
    * The JSON Pointer to the target document location from which to move the value. Required for the move operation.
    */
-  from: string;
+  from?: string;
 };
 
 /**
@@ -35,7 +35,7 @@ export class WebhookUpdateRequest extends HttpRequestBase<
 > {
   constructor(webhookId: string) {
     super();
-    this.verb = 'POST';
+    this.verb = 'PATCH';
     this.path = '/v1/notifications/webhooks/{webhook_id}?';
     this.path = this.path.replace(
       '{webhook_id}',

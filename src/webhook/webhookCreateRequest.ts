@@ -1,4 +1,3 @@
-import querystring from 'querystring';
 import { HttpRequestBase } from '../core/HttpRequestBase.js';
 import { type BaseWebhookHeaders } from '../types/type-webhook.js';
 
@@ -24,14 +23,10 @@ export class WebhookCreateRequest extends HttpRequestBase<
   BaseWebhookHeaders,
   WebhookCreateRequestBody
 > {
-  constructor(webhookId: string) {
+  constructor() {
     super();
     this.verb = 'POST';
-    this.path = '/v1/notifications/webhooks/{webhook_id}?';
-    this.path = this.path.replace(
-      '{webhook_id}',
-      querystring.escape(webhookId)
-    );
+    this.path = '/v1/notifications/webhooks';
     this.headers = {
       'Content-Type': 'application/json',
     };
