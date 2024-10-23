@@ -3,7 +3,7 @@ import {
   type BaseOrderHeaders,
   type CheckoutPaymentIntent,
   type OrderApplicationContext,
-  PaymentSourceRequest,
+  type PaymentSourceRequest,
   type PurchaseUnitRequest,
 } from '../types/type-order.js';
 

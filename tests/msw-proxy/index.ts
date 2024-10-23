@@ -1,4 +1,4 @@
-import { RequestHandler } from 'msw';
+import type { RequestHandler } from 'msw';
 import { setupServer } from 'msw/node';
 import { partnerReferral } from './customer/partnerReferral.js';
 import { partnerReferralGet } from './customer/partnerReferralGet.js';
