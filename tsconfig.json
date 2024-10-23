@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "outDir": "dist",
+    "module": "NodeNext",
     "noImplicitAny": false,
     "allowJs": false,
     "noEmit": false,

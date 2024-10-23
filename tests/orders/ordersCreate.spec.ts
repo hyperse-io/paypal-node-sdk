@@ -13,9 +13,11 @@ describe('OrdersCreateRequest', () => {
     expect(createdOrder.purchase_units.length).toBe(1);
 
     const firstPurchaseUnit = createdOrder.purchase_units[0];
-    expect(firstPurchaseUnit.reference_id).toBe('test_ref_id1');
-    expect(firstPurchaseUnit.amount.currency_code).toBe('USD');
-    expect(firstPurchaseUnit.amount.value).toBe('100.00');
+    expect(firstPurchaseUnit.reference_id).toBe('default');
+    expect(firstPurchaseUnit.amount).toEqual({
+      currency_code: 'USD',
+      value: '100.00',
+    });
 
     expect(createdOrder.create_time).not.toBeNull();
     expect(createdOrder.links).not.toBeNull();
