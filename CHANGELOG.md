@@ -1,5 +1,11 @@
 # @hyperse/paypal-node-sdk
 
+## 2.0.6
+
+### Patch Changes
+
+- [`25181c6`](https://github.com/hyperse-io/paypal-node-sdk/commit/25181c6d86c4ae31829e5183e8ff3c4924b6cd29) Thanks [@tianyingchun](https://github.com/tianyingchun)! - bump version
+
 ## 2.0.5
 
 ### Patch Changes
