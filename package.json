@@ -88,7 +88,7 @@
     "@commitlint/config-conventional": "19.6.0",
     "@hyperse/eslint-config-hyperse": "^1.2.7",
     "@swc/core": "1.9.2",
-    "@types/node": "22.9.1",
+    "@types/node": "22.10.7",
     "commitizen": "4.3.1",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.4.5",
