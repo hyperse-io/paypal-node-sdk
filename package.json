@@ -30,6 +30,11 @@
       "types": "./dist/core/index.d.ts",
       "default": "./dist/core/index.js"
     },
+    "./http": {
+      "import": "./dist/http/index.js",
+      "types": "./dist/http/index.d.ts",
+      "default": "./dist/http/index.js"
+    },
     "./orders": {
       "import": "./dist/orders/index.js",
       "types": "./dist/orders/index.d.ts",
@@ -79,10 +84,6 @@
   },
   "resolutions": {
     "typescript": "6.x"
-  },
-  "dependencies": {
-    "@paypal/paypalhttp": "^1.0.1",
-    "@types/paypal__paypalhttp": "^1.0.3"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^1.0.0",

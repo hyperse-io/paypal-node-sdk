@@ -11,19 +11,19 @@ export interface AccessTokenOptions {
   access_token: string;
 
   /**
-   * The token type
+   * The duration of the token in seconds
    */
   expires_in: number;
 
   /**
-   * The duration of the token in milliseconds
+   * The token type
    */
   token_type: string;
 
   /**
    * The refresh token if any to refresh the current token
    */
-  refresh_token: string;
+  refresh_token?: string;
 }
 
 /**
@@ -48,7 +48,13 @@ export class AccessToken {
   constructor(options: AccessTokenOptions) {
     this._accessToken = options.access_token;
     this._tokenType = options.token_type;
-    this._expiresIn = options.expires_in * 1000;
+
+    const expiresIn = Number(options.expires_in);
+
+    // A missing/invalid `expires_in` used to produce `NaN`, and
+    // `Date.now() > NaN` is always false, so the token looked immortal and was
+    // never refreshed. Treat it as already expired instead.
+    this._expiresIn = Number.isFinite(expiresIn) ? expiresIn * 1000 : 0;
     this._dateCreated = Date.now();
   }
 
@@ -57,6 +63,10 @@ export class AccessToken {
    * @return - True if the token is expired otherwise false
    */
   isExpired() {
+    if (this._expiresIn <= 0) {
+      return true;
+    }
+
     return (
       Date.now() > this._dateCreated + this._expiresIn - EXPIRATION_THRESHOLD
     );

@@ -1,3 +1,5 @@
+import { type HttpVerb } from '../http/types.js';
+
 export interface BaseHeaders {
   /**
    * Will automatically be set to `Authorization` header value while http client
@@ -7,15 +9,7 @@ export interface BaseHeaders {
 
 export interface BaseRequest<H, B = null> {
   readonly path: string;
-  readonly verb:
-    | 'CONNECT'
-    | 'DELETE'
-    | 'GET'
-    | 'HEAD'
-    | 'OPTIONS'
-    | 'PATCH'
-    | 'POST'
-    | 'PUT';
+  readonly verb: HttpVerb;
   readonly body: B;
   readonly headers: H;
 }
@@ -25,15 +19,7 @@ export class HttpRequestBase<
   B = null,
 > implements BaseRequest<H, B> {
   path: string;
-  verb:
-    | 'CONNECT'
-    | 'DELETE'
-    | 'GET'
-    | 'HEAD'
-    | 'OPTIONS'
-    | 'PATCH'
-    | 'POST'
-    | 'PUT';
+  verb: HttpVerb;
   body: B;
   headers: H;
 

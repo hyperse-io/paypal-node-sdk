@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
-import { type HttpRequest } from '@paypal/paypalhttp';
+import { type HttpRequest } from '../http/types.js';
 import { type AccessToken } from './AccessToken.js';
 import { type PayPalEnvironment } from './PayPalEnvironment.js';
 
-const _cacheMap: Record<string, TokenCache> = {};
+const _cacheMap = new Map<string, TokenCache>();
 
 /**
  * Stores token, token status and a request queue for every client
@@ -14,24 +14,39 @@ const _cacheMap: Record<string, TokenCache> = {};
 export class TokenCache {
   private _token: AccessToken | null;
   private _locked: boolean;
-  private _requests: HttpRequest[];
+  private _requests: HttpRequest<any>[];
   private _emitter: EventEmitter;
 
+  /**
+   * Cache key is scoped by `baseUrl` as well as `clientId`: the same client id
+   * can exist in both sandbox and live, and tokens are not interchangeable.
+   */
   static cacheForEnvironment(
     environment: PayPalEnvironment,
     refreshToken?: string
   ) {
-    let key = environment.clientId;
+    let key = `${environment.baseUrl}|${environment.clientId}`;
 
     if (refreshToken) {
-      key += `_${refreshToken}`;
+      key += `|${refreshToken}`;
     }
 
-    if (!_cacheMap[key]) {
-      _cacheMap[key] = new TokenCache();
+    let cache = _cacheMap.get(key);
+
+    if (!cache) {
+      cache = new TokenCache();
+      _cacheMap.set(key, cache);
     }
 
-    return _cacheMap[key];
+    return cache;
+  }
+
+  /**
+   * Drops every cached token. Mostly useful in tests and long running workers
+   * that rotate credentials at runtime.
+   */
+  static clearAll() {
+    _cacheMap.clear();
   }
 
   constructor() {
@@ -84,16 +99,19 @@ export class TokenCache {
    * @param {Object} request - The request to be queued
    * @return {Promise} - A promise that will resolve or rejects when the notify method is called
    * */
-  wait(request: HttpRequest) {
+  wait(request: HttpRequest<any>) {
     this._requests.push(request);
-    return new Promise((resolve, reject) => {
-      const completeHandler = (req) => {
+
+    return new Promise<HttpRequest<any>>((resolve, reject) => {
+      const completeHandler = (req: HttpRequest<any>) => {
         if (request === req) {
           this._emitter.removeListener('complete', completeHandler);
+          this._emitter.removeListener('fail', failHandler);
           resolve(request);
         }
       };
-      const failHandler = (err) => {
+      const failHandler = (err: unknown) => {
+        this._emitter.removeListener('complete', completeHandler);
         this._emitter.removeListener('fail', failHandler);
         reject(err);
       };
@@ -108,7 +126,7 @@ export class TokenCache {
    * @param {Array} [err] - An optional error that rejects all requests instead of resolving them
    * @return {void} - void
    */
-  notify(err?) {
+  notify(err?: unknown) {
     if (err) {
       this._emitter.emit('fail', err);
     } else {

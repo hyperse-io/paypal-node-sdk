@@ -1,4 +1,4 @@
-import paypalhttp from '@paypal/paypalhttp';
+import { HttpEnvironment } from '../http/HttpClient.js';
 
 const SANDBOX = 'https://api.sandbox.paypal.com';
 const LIVE = 'https://api.paypal.com';
@@ -11,7 +11,7 @@ const LIVE_WEB_URL = 'https://www.paypal.com';
  *
  * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/PayPalEnvironment.ts}
  */
-export class PayPalEnvironment extends paypalhttp.Environment {
+export class PayPalEnvironment extends HttpEnvironment {
   public clientId: string;
   public clientSecret: string;
   public webUrl: string;

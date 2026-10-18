@@ -839,10 +839,8 @@ __metadata:
     "@commitlint/config-conventional": "npm:^21.2.3"
     "@hyperse/eslint-config-hyperse": "npm:^2.0.0"
     "@mswjs/data": "npm:^0.16.2"
-    "@paypal/paypalhttp": "npm:^1.0.1"
     "@swc/core": "npm:^1.16.18"
     "@types/node": "npm:^26.6.5"
-    "@types/paypal__paypalhttp": "npm:^1.0.3"
     commitizen: "npm:^4.3.2"
     cz-conventional-changelog: "npm:^3.3.0"
     dotenv: "npm:^18.0.8"
@@ -1264,13 +1262,6 @@ __metadata:
   version: 0.154.0
   resolution: "@oxc-project/types@npm:0.154.0"
   checksum: 10/543b06a3955f178214ff159092e3fe83a92355bc9e7e712f8992c15b5ad6149c854c495986df37a8295977ef5f27d30f36229546f913e67a72418bbade333bf3
-  languageName: node
-  linkType: hard
-
-"@paypal/paypalhttp@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@paypal/paypalhttp@npm:1.0.1"
-  checksum: 10/89f894c3385a7309b060cfbb84a9439f440378551d2d7a851934504ce18c4132168401b27be60bebc300d764bf7f5876a5a866f68696f0cd8efdb8c59152f199
   languageName: node
   linkType: hard
 
@@ -1739,15 +1730,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10/f77b0e1c3c00e438b56c726d6b1170d4969c600cc8d4ecf2c2aa7692243a8ff455a3d530760da95e0b6aab059c4605a384b43d18f96646c745ff133c00b84875
-  languageName: node
-  linkType: hard
-
-"@types/paypal__paypalhttp@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@types/paypal__paypalhttp@npm:1.0.3"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10/ea3ddb4ac2cedd08c77f596cfc16101f00eb94c44c0043328e2394b004fcd5abd1fffc247fbe07586dd1087d33368928e5b11dbc81499e887c4007a747fce87a
   languageName: node
   linkType: hard
 

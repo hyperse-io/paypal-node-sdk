@@ -1,7 +1,9 @@
 import { readFileSync } from 'fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import paypalhttp, { type HttpRequest } from '@paypal/paypalhttp';
+import { PayPalHttpError } from '../http/errors.js';
+import { HttpClient, type HttpClientOptions } from '../http/HttpClient.js';
+import { type HttpRequest, type HttpResponse } from '../http/types.js';
 import { AccessToken } from './AccessToken.js';
 import { AccessTokenRequest } from './AccessTokenRequest.js';
 import { type HttpRequestBase } from './HttpRequestBase.js';
@@ -17,58 +19,67 @@ const getDirname = (url: string, ...paths: string[]) => {
   return join(dirname(fileURLToPath(url)), ...paths);
 };
 
+const packageJson = JSON.parse(
+  readFileSync(getDirname(import.meta.url, '../../package.json'), 'utf8')
+) as { version: string };
+
 /**
  * PayPal Http client
  * Documentation
  *
  * @see {@link https://github.com/hyperse-io/paypal-node-sdk/tree/main/src/core/PayPalHttpClient.ts}
  */
-
-export class PayPalHttpClient extends paypalhttp.HttpClient {
+export class PayPalHttpClient extends HttpClient {
   private _cache: TokenCache;
   public refreshToken?: string;
-  private package: { version: string };
 
   /**
    * @param  environment - The environment for this client
    * @param refreshToken - The refreshToken to be used to generate the access Token.
    */
-  constructor(environment: PayPalEnvironment, refreshToken?: string) {
-    super(environment);
+  constructor(
+    environment: PayPalEnvironment,
+    refreshToken?: string,
+    options: HttpClientOptions = {}
+  ) {
+    super(environment, options);
     this._cache = TokenCache.cacheForEnvironment(environment, refreshToken);
     this.refreshToken = refreshToken;
+
     this.addInjector(this.authInjector);
-    this.package = JSON.parse(
-      readFileSync(getDirname(import.meta.url, '../../package.json'), 'utf8')
-    );
-    this.addInjector(function (req) {
-      req.headers['Accept-Encoding'] = 'gzip';
+    this.addInjector((req) => {
       req.headers['sdk_name'] = 'Checkout SDK';
-      req.headers['sdk_version'] = '1.0.2';
+      // Read from package.json instead of a hardcoded string that drifted
+      // (it used to report 1.0.2 while the package was at 2.0.6).
+      req.headers['sdk_version'] = packageJson.version;
       req.headers['sdk_tech_stack'] = 'NodeJS ' + process.version;
       req.headers['api_integration_type'] = 'PAYPALSDK';
     });
   }
+
   /**
    * An injector that fetches token when the client has no token or is expired and queues calls if the token is refreshing
-   * @param {Object} request - The current request for the client
-   * @return {Promise.<any>} Promise that fetches a new access Token
+   * @param request - The current request for the client
+   * @return Promise that fetches a new access Token
    */
-  private authInjector = (request: HttpRequest): void | Promise<void> => {
+  private authInjector = (request: HttpRequest<any>): void | Promise<void> => {
     if (request.headers.Authorization) {
       return;
     }
 
     if (this._cache.isValid()) {
       this._setAuthHeader(request);
-    } else if (this._cache.isLocked()) {
-      return this._cache.wait(request).then(() => this._setAuthHeader(request));
-    } else if (!this._cache.isValid()) {
-      return Promise.all([
-        this._cache.wait(request),
-        this.fetchAccessToken(),
-      ]).then(() => this._setAuthHeader(request));
+      return;
     }
+
+    if (this._cache.isLocked()) {
+      return this._cache.wait(request).then(() => this._setAuthHeader(request));
+    }
+
+    return Promise.all([
+      this._cache.wait(request),
+      this.fetchAccessToken(),
+    ]).then(() => this._setAuthHeader(request));
   };
 
   /**
@@ -79,7 +90,7 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
   getUserAgent() {
     return (
       'PayPalSDK/PayPal-node-SDK ' +
-      this.package.version +
+      packageJson.version +
       ' (node ' +
       process.version +
       '-' +
@@ -97,66 +108,96 @@ export class PayPalHttpClient extends paypalhttp.HttpClient {
    * @param request Request Instance of HttpRequest
    * @returns
    */
-  execute<T = any>(
+  async execute<T = any>(
     request: HttpRequestBase<any, any>
-  ): Promise<paypalhttp.HttpResponse<T>> {
-    return super.execute(request).catch((err) => {
-      if (err.statusCode === 401) {
-        return this._retryRequest(request);
+  ): Promise<HttpResponse<T>> {
+    try {
+      return await super.execute<T>(request);
+    } catch (error) {
+      if (error instanceof PayPalHttpError && error.statusCode === 401) {
+        return this._retryRequest<T>(request);
       }
-      return Promise.reject(err);
-    });
+      throw error;
+    }
   }
 
-  _retryRequest(request: HttpRequest) {
-    const promise = this._cache.wait(request).then(() => {
-      this._setAuthHeader(request);
-      return super.execute(request);
-    });
+  async _retryRequest<T = any>(
+    request: HttpRequestBase<any, any>
+  ): Promise<HttpResponse<T>> {
+    // A 401 means the cached token is stale. Drop it *and* any header we put on
+    // this request earlier, otherwise the retry would replay the dead token.
+    this._cache.setToken(null);
+    delete request.headers.Authorization;
+
+    const promise = this._cache
+      .wait(request)
+      .then(() => this._setAuthHeader(request));
 
     if (this._cache.isLocked()) {
-      return promise;
+      return promise.then(() => super.execute<T>(request));
     }
 
-    // Avoids node UnhandledPromiseRejectionWarning on access token failure.
-    return Promise.race([this.fetchAccessToken(), promise]).then(() => promise);
+    return Promise.all([this.fetchAccessToken(), promise]).then(() =>
+      super.execute<T>(request)
+    );
   }
 
-  fetchAccessToken() {
+  async fetchAccessToken(): Promise<AccessToken> {
     this._cache.lock();
-    return super
-      .execute(
+
+    try {
+      const response = await super.execute<AccessTokenRequestResult>(
         new AccessTokenRequest(
           this.environment as PayPalEnvironment,
           this.refreshToken
         )
-      )
-      .then((resp) => {
-        const token = new AccessToken(resp.result);
+      );
 
-        this._cache.setToken(token);
-        this._cache.notify();
-        this._cache.unlock();
-        return token;
-      })
-      .catch((err) => {
-        this._cache.setToken(null);
-        this._cache.notify(err);
-        this._cache.unlock();
-        return Promise.reject(err);
-      });
+      const token = new AccessToken(response.result);
+
+      this._cache.setToken(token);
+      this._cache.notify();
+
+      return token;
+    } catch (error) {
+      this._cache.setToken(null);
+      this._cache.notify(error);
+      throw error;
+    } finally {
+      // Always release the lock, including when the request failed
+      // synchronously. Previously an error here left the cache locked forever
+      // and every subsequent request hung on `TokenCache.wait()`.
+      this._cache.unlock();
+    }
   }
 
   /**
    * Sets the Authorization header for this request based on the client token
-   * @param {Object} request - The request to modify
+   * @param request - The request to modify
    * @private
    * @return {void}
    */
-  _setAuthHeader(request: HttpRequest) {
+  _setAuthHeader(request: HttpRequest<any>) {
     const token = this._cache.getToken();
 
-    request.headers = request.headers || {};
-    request.headers.Authorization = token?.authorizationString();
+    if (!token) {
+      // Writing `undefined` into a header makes Node throw
+      // ERR_HTTP_INVALID_HEADER_VALUE. Leaving the caller's header untouched is
+      // the safer behaviour; the auth injector will re-fetch on the next pass.
+      return;
+    }
+
+    request.headers = request.headers ?? {};
+    request.headers.Authorization = token.authorizationString();
   }
 }
+
+/**
+ * Shape of the `/v1/oauth2/token` response body.
+ */
+type AccessTokenRequestResult = {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+  refresh_token?: string;
+};
