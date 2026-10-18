@@ -1,5 +1,5 @@
-import { createClient } from 'samples/Common/payPalClient.js';
 import { orders } from '@hyperse/paypal-node-sdk';
+import { createClient } from '../Common/payPalClient.js';
 
 /**
  * Setting up the complete JSON request body for creating the Order. The Intent
@@ -161,6 +161,7 @@ export async function createOrderWithCompletePayload(debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }
 
@@ -199,5 +200,6 @@ export async function createOrderWithPartialPayload(debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }

@@ -1,5 +1,5 @@
-import { createClient } from 'samples/Common/payPalClient.js';
 import { payments } from '@hyperse/paypal-node-sdk';
+import { createClient } from '../Common/payPalClient.js';
 
 /**
  * This function can be used to capture the payment on an authorized Order.
@@ -32,5 +32,6 @@ export async function captureOrder(authId, debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }

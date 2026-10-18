@@ -36,5 +36,6 @@ export async function refundOrder(captureId, debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }

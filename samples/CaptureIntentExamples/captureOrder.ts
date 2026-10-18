@@ -1,5 +1,5 @@
-import { createClient } from 'tests/test-utils.js';
 import { orders } from '@hyperse/paypal-node-sdk';
+import { createClient } from '../Common/payPalClient.js';
 
 /**
  * This function can be used to capture an order payment by passing the approved
@@ -38,5 +38,6 @@ export async function captureOrder(orderId, debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }

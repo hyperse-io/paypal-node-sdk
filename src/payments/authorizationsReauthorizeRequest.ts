@@ -6,8 +6,7 @@ type AuthorizationsReauthorizeRequestBody = {
   amount: Money;
 };
 
-export interface AuthorizationsReauthorizeRequestHeaders
-  extends BasePaymentHeaders {
+export interface AuthorizationsReauthorizeRequestHeaders extends BasePaymentHeaders {
   'PayPal-Request-Id'?: string;
   Prefer?: string;
 }

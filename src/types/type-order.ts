@@ -70,14 +70,7 @@ export interface ThreeDSecureAuthenticationResponse {
 }
 
 export type AuthenticationStatus =
-  | 'Y'
-  | 'N'
-  | 'U'
-  | 'A'
-  | 'C'
-  | 'R'
-  | 'D'
-  | 'I';
+  'Y' | 'N' | 'U' | 'A' | 'C' | 'R' | 'D' | 'I';
 
 export type EnrollmentStatus = 'Y' | 'N' | 'U' | 'B';
 
@@ -305,10 +298,7 @@ export interface ModelCustomerServiceContact {
 
 // https://developer.paypal.com/docs/api/orders/v2/#definition-model-enums-currency_receiving_type
 export type ModelEnumsCurrencyReceivingType =
-  | 'ACCEPT'
-  | 'ACCEPT_OPEN'
-  | 'DENY'
-  | 'HOLD';
+  'ACCEPT' | 'ACCEPT_OPEN' | 'DENY' | 'HOLD';
 
 // https://developer.paypal.com/docs/api/orders/v2/#definition-model-enums-disbursement_type
 export type ModelEnumsDisbursementType = 'INSTANT' | 'DELAYED';
@@ -584,9 +574,7 @@ export interface OrderApplicationContext {
 }
 
 export type ShippingPreference =
-  | 'GET_FROM_FILE'
-  | 'NO_SHIPPING'
-  | 'SET_PROVIDED_ADDRESS';
+  'GET_FROM_FILE' | 'NO_SHIPPING' | 'SET_PROVIDED_ADDRESS';
 
 export type UserAction = 'CONTINUE' | 'PAY_NOW';
 

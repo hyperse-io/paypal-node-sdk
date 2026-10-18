@@ -20,9 +20,10 @@ export interface BaseRequest<H, B = null> {
   readonly headers: H;
 }
 
-export class HttpRequestBase<H extends BaseHeaders, B = null>
-  implements BaseRequest<H, B>
-{
+export class HttpRequestBase<
+  H extends BaseHeaders,
+  B = null,
+> implements BaseRequest<H, B> {
   path: string;
   verb:
     | 'CONNECT'

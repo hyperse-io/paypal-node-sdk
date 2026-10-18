@@ -8,11 +8,13 @@ on:
       - minor
     # Only consider those paths to trigger the action
     paths:
-      - 'packages/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'samples/**'
       - 'package.json'
       - '*.lock'
       - '.yarnrc.yml'
-      - 'tsconfig.base.json'
+      - 'tsconfig*.json'
       - '.prettier*'
       - '.github/**'
 
@@ -27,11 +29,13 @@ on:
       - reopened
     # Only consider those paths to trigger the action
     paths:
-      - 'packages/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'samples/**'
       - 'package.json'
       - '*.lock'
       - '.yarnrc.yml'
-      - 'tsconfig.base.json'
+      - 'tsconfig*.json'
       - '.prettier*'
       - '.github/**'
 jobs:
@@ -40,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [lts/*]
     steps:
       - uses: actions/checkout@v4
 
@@ -56,10 +60,10 @@ jobs:
         run: |
           yarn lint
 
-      - name: Unit tests
-        run: |
-          yarn test
-
       - name: Build
         run: |
           yarn build
+
+      - name: Unit tests
+        run: |
+          yarn test

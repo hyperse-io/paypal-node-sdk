@@ -62,14 +62,11 @@ describe('CustomersPartnerReferralsRequest', () => {
     expect(firstPartnerReferralsLink.method).toBe('GET');
     expect(firstPartnerReferralsLink.description).not.toBeNull();
 
-    let actionURL = false;
-    for (const link of customersPartnerReferrals.links) {
-      if ('action_url' === link.rel) {
-        actionURL = true;
-        expect(link.href).not.toBeNull();
-        expect(link.method).toBe('GET');
-      }
-    }
-    chai.assert.isTrue(actionURL);
+    const actionUrlLink = customersPartnerReferrals.links.find(
+      (link) => 'action_url' === link.rel
+    );
+    expect(actionUrlLink).toBeDefined();
+    expect(actionUrlLink?.href).not.toBeNull();
+    expect(actionUrlLink?.method).toBe('GET');
   });
 });

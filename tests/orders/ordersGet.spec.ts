@@ -30,15 +30,12 @@ describe('OrdersGetRequest', () => {
     expect(createdOrder.create_time).not.toBeNull();
     expect(createdOrder.links).not.toBeNull();
 
-    let foundApproveURL = false;
-    for (const link of createdOrder.links) {
-      if ('approve' === link.rel) {
-        foundApproveURL = true;
-        expect(link.href).not.toBeNull();
-        expect(link.method).toBe('GET');
-      }
-    }
-    expect(foundApproveURL).toBe(true);
+    const approveLink = createdOrder.links.find(
+      (link) => 'approve' === link.rel
+    );
+    expect(approveLink).toBeDefined();
+    expect(approveLink?.href).not.toBeNull();
+    expect(approveLink?.method).toBe('GET');
     expect(createdOrder.status).toBe('CREATED');
   });
 });

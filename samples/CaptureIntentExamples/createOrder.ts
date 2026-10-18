@@ -1,5 +1,5 @@
-import { createClient } from 'tests/test-utils.js';
 import { orders } from '@hyperse/paypal-node-sdk';
+import { createClient } from '../Common/payPalClient.js';
 
 /**
  * Setting up the JSON request body for creating the Order. The Intent in the
@@ -134,5 +134,6 @@ export async function createOrder(debug = false) {
     return response;
   } catch (e) {
     console.log(e);
+    return undefined;
   }
 }

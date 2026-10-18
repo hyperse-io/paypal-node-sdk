@@ -22,28 +22,28 @@
   "exports": {
     ".": {
       "import": "./index.js",
-      "default": "./index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./index.js"
     },
     "./core": {
       "import": "./dist/core/index.js",
-      "default": "./dist/core/index.js",
-      "types": "./dist/core/index.d.ts"
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
     },
     "./orders": {
       "import": "./dist/orders/index.js",
-      "default": "./dist/orders/index.js",
-      "types": "./dist/orders/index.d.ts"
+      "types": "./dist/orders/index.d.ts",
+      "default": "./dist/orders/index.js"
     },
     "./payments": {
       "import": "./dist/payments/index.js",
-      "default": "./dist/payments/index.js",
-      "types": "./dist/payments/index.d.ts"
+      "types": "./dist/payments/index.d.ts",
+      "default": "./dist/payments/index.js"
     },
     "./webhook": {
       "import": "./dist/webhook/index.js",
-      "default": "./dist/webhook/index.js",
-      "types": "./dist/webhook/index.d.ts"
+      "types": "./dist/webhook/index.d.ts",
+      "default": "./dist/webhook/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -58,19 +58,19 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc -p ./tsconfig.build.json ",
+    "changeset": "changeset",
     "clean": "rimraf --no-glob ./dist ./coverage ./.eslintcache ./tsconfig.tsbuildinfo",
-    "test": "vitest run --dir tests/",
-    "test-task": "vitest run",
+    "cz": "cz",
+    "fix-all-files": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
     "lint": "eslint .",
     "lint-fix": "yarn lint --fix",
-    "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "lint-staged-files": "lint-staged --allow-empty",
-    "fix-all-files": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
-    "changeset": "changeset",
-    "version": "changeset version",
+    "prepare": "husky",
     "release": "yarn run build && changeset publish",
-    "cz": "cz",
-    "prepare": "husky"
+    "test": "vitest run --dir tests/",
+    "test-task": "vitest run",
+    "typecheck": "tsc --project ./tsconfig.json --noEmit",
+    "version": "changeset version"
   },
   "config": {
     "commitizen": {
@@ -78,37 +78,38 @@
     }
   },
   "resolutions": {
-    "typescript": "5.8.3"
+    "typescript": "6.x"
   },
   "dependencies": {
-    "@mswjs/data": "^0.16.2",
     "@paypal/paypalhttp": "^1.0.1",
     "@types/paypal__paypalhttp": "^1.0.3"
   },
   "devDependencies": {
-    "@changesets/changelog-git": "^0.2.1",
-    "@changesets/changelog-github": "^1.0.0",
-    "@changesets/cli": "^3.0.0",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@hyperse/eslint-config-hyperse": "^1.4.5",
-    "@swc/core": "^1.13.3",
-    "@types/node": "^24.1.0",
-    "commitizen": "^4.3.1",
+    "@changesets/changelog-git": "^1.0.0",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@hyperse/eslint-config-hyperse": "^2.0.0",
+    "@mswjs/data": "^0.16.2",
+    "@swc/core": "^1.16.18",
+    "@types/node": "^26.6.5",
+    "commitizen": "^4.3.2",
     "cz-conventional-changelog": "^3.3.0",
-    "dotenv": "^17.2.1",
-    "eslint": "^9.32.0",
+    "dotenv": "^18.0.8",
+    "eslint": "^10.13.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
+    "lint-staged": "^17.6.0",
     "minimist": "^1.2.8",
-    "msw": "^2.10.4",
+    "msw": "^3.0.3",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^6.0.1",
+    "rimraf": "^6.1.3",
     "swc-unplugin-ts": "^1.0.3",
-    "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   },
-  "packageManager": "yarn@4.9.2",
+  "packageManager": "yarn@4.18.1",
   "engines": {
     "node": ">=22.11.0"
   }

@@ -227,14 +227,7 @@ export interface LinkDescription {
 }
 
 export type Method =
-  | 'CONNECT'
-  | 'DELETE'
-  | 'GET'
-  | 'HEAD'
-  | 'OPTIONS'
-  | 'PATCH'
-  | 'POST'
-  | 'PUT';
+  'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT';
 
 // https://developer.paypal.com/docs/api/payments/v2/#definition-money
 export interface Money {
